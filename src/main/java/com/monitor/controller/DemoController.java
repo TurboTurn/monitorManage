@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * @author : ys
  * @date : 2019/4/15 15:20 星期一
@@ -35,6 +40,36 @@ public class DemoController {
 		data += 1.5;
 		logger.info("返回值为{}",data);
 		return data;
+	}
+	@RequestMapping("/lunxun")
+	public void fun3(HttpServletResponse response) throws IOException {
+//		while (true) {
+			data += 1.5;
+		PrintWriter out = response.getWriter();
+
+			for (int i=0;i<10;i++){
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				logger.info("返回值为{}", data);
+				out.println(data);
+				out.flush();
+			}
+
+
+//		}
+	}
+
+
+	@RequestMapping("/getIp")
+	public String grtIp(HttpServletRequest request, HttpServletResponse response){
+		String ip =request.getServerName();
+		int port = request.getServerPort();
+		System.out.println(ip);
+		System.out.println(port);
+		return ip+":"+port;
 	}
 
 

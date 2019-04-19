@@ -50,7 +50,10 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>provided</scope><!--打包时不放进去-->
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 
 
        <!-- influx api -->

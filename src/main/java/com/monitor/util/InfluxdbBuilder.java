@@ -8,6 +8,9 @@ import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.influxdb.impl.InfluxDBMapper;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -16,10 +19,15 @@ import java.util.concurrent.TimeUnit;
  * @author : ys
  * @date : 2019/4/15 15:49 星期一
  **/
+@Component
+@PropertySource("classpath:influxDB.properties")
 public class InfluxdbBuilder {
+	@Value("${influx.username}")
+	String username;
 	public static InfluxDB createInfluxDB(){
 		String url1 = "http://127.0.0.1:8086";
 		String url2 = "http://58.49.96.182:8086";
+
 		InfluxDB influxDB = InfluxDBFactory.connect(url1,"root","admin");
 		influxDB.setDatabase("ys");
 		return influxDB;
@@ -79,8 +87,8 @@ public class InfluxdbBuilder {
 //		model.setTime(Instant.now());
 		model.setHostname("localhost");
 		model.setHappyDevop(true);
-		model.setRegion("wuhan");
-		model.setIdle(21.33);
+		model.setRegion("ezhou");
+		model.setIdle(15.34);
 		mapper.save(model);
 
 	}
@@ -111,12 +119,6 @@ public class InfluxdbBuilder {
 	}
 	@Test
 	public void delayinsert(){
-		int arr[] =new int[3];
-		int index =0;
-		arr[index++]=2;CharSequence c="ff";
-		System.out.println(c);
-		for(int a : arr)
-			System.out.println(a);
-
+		System.out.println(username);
 	}
 }

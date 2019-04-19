@@ -2,7 +2,9 @@ import com.monitor.App;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -12,7 +14,12 @@ import org.springframework.web.context.WebApplicationContext;
  **/
 @SpringBootTest(classes = {App.class})
 @RunWith(SpringRunner.class)
+@PropertySource("classpath:influxDB.properties")
 public class TestDemo {
+
+	@Value("${influx.username}")
+	String username;
+
 	@Autowired
 	WebApplicationContext applicationContext;
 	@Test
@@ -21,5 +28,10 @@ public class TestDemo {
 		for (String s : names){
 			System.out.println(s);
 		}
+	}
+
+	@Test
+	public void test2(){
+		System.out.println(username);
 	}
 }
