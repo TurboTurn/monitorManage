@@ -37,25 +37,27 @@
                 name: '业务指标',
                 type: 'gauge',
                 detail: {formatter: '{value}%'},
-                data: [{value: 50, name: '完成率'}]
+                data: [{value: 0, name: '完成率'}]
             }
         ]
     };
 
-   /* setInterval(function () {
-        $.get('/data').done(function (data) {
-            // 填入数据
-            // var num=data;
-            option.series[0].data[0].value = data;
-        });
-        myChart.setOption(option, true);
-    }, 2000);*/
 
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
-
-    var websocket = new WebSocket("ws://127.0.0.1:8080/websocketServer");
+    var ip;
+    $.ajax({
+        type:"get",
+        async:false,//同步执行
+        url:"/getIp",
+        dataType:"text",
+        success:function (data) {
+            ip=data;
+        }
+    });
+    // alert(ip);
+    var websocket = new WebSocket("ws://"+ip+"/websocketServer");
 
 
     //连接成功建立的回调方法
@@ -69,7 +71,7 @@
     };
     //连接关闭的回调方法
     websocket.onclose = function () {
-        alert("WebSocket连接关闭");
+        console.log("WebSocket连接关闭");
     };
     //连接发生错误的回调方法
     websocket.onerror = function () {
