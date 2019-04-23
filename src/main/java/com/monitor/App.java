@@ -19,9 +19,9 @@ import static com.monitor.controller.WebSocketServer.webSocketSet;
 public class App {
 	public static void main(String[] args) {
 		SpringApplication.run(App.class,args);
-
 		new Thread(()->{// todo 模拟推送数据线程，后期用opc收集数据，与上一次有变化时才推送
 			double a=12.1;
+			boolean flag = true;
 			while (true){
 				for (WebSocketServer webSocket:webSocketSet){
 					try {
@@ -35,7 +35,13 @@ public class App {
 				System.out.println();
 				try {
 					TimeUnit.SECONDS.sleep(2);
-					a+=1.32;
+					if(flag){
+						a+=1.32;
+						flag=false;
+					}else {
+						a-=1.31;
+						flag=true;
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

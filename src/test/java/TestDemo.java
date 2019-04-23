@@ -32,6 +32,8 @@ public class TestDemo {
 
 	@Test
 	public void test2(){
-		System.out.println(username);
+//		System.out.println(username);
+		int a=5;a=~a;
+		System.out.println(a);
 	}
 }
