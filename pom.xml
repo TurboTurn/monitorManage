@@ -45,11 +45,11 @@
 <!--            junit的@Test注解默认配置是只能在名称为test的目录下面使用-->
 <!--            <scope>test</scope>-->
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <scope>provided</scope><!--打包时不放进去-->
-        </dependency>
+            <scope>provided</scope>&lt;!&ndash;打包时不放进去&ndash;&gt;
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>

@@ -46,7 +46,7 @@
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
-    var ip;
+    /*var ip;
     $.ajax({
         type:"get",
         async:false,//同步执行
@@ -55,10 +55,9 @@
         success:function (data) {
             ip=data;
         }
-    });
+    });*/
     // alert(ip);
-    var websocket = new WebSocket("ws://"+ip+"/websocketServer");
-
+    var websocket = new WebSocket("ws://"+window.location.host+"/websocketServer");
 
     //连接成功建立的回调方法
     websocket.onopen = function () {
