@@ -1,16 +1,16 @@
 package com.monitor;
 
-import com.monitor.controller.LineWebSocket;
 import com.monitor.controller.WebSocketServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.websocket.Session;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static com.monitor.controller.LineWebSocket.lineWebSocketSet;
+import static com.monitor.controller.LineWebSocket.lineSessionSet;
 import static com.monitor.controller.WebSocketServer.webSocketSet;
 
 /**
@@ -58,13 +58,13 @@ public class App {
 			ArrayDeque<Integer> deque = new ArrayDeque<>();
 			int b = 200;
 			Random random = new Random();
-			for (int i = 0; i < 30; i++) {
+			for (int i = 0; i < 60; i++) {
 				deque.addLast(b + random.nextInt(100));
 			}
 			while (true) {
-				for (LineWebSocket lineWebSocket : lineWebSocketSet) {
+				for (Session session : lineSessionSet) {
 					try {
-						lineWebSocket.sendMessage(deque.toString());//推送数据
+						session.getBasicRemote().sendText(deque.toString());//推送数据
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

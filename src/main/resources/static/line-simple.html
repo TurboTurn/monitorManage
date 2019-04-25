@@ -29,14 +29,19 @@
             type: 'value'
         },
         series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            // data: [820, 932, 901, 934, 1290, 1330, 1320],
             type: 'line',
             smooth: true,
-            animation: false
-        }]
+            animation: false,//加载动画
+            // showSymbol: false,//显示点
+            hoverAnimation: false
+        }],
+        tooltip:{
+            trigger:'axis'
+        }
     };
     var arr=[];
-    for(var i=1;i<31;i++){
+    for(var i=1;i<61;i++){
         arr.push(i);
     }
     option.xAxis.data=arr;//x坐标
@@ -49,14 +54,17 @@
     //连接成功建立的回调方法
     websocket.onopen = function () {
         console.log("WebSocket连接成功");
+        websocket.send("line");
     };
     //接收到消息的回调方法
     websocket.onmessage = function (event) {
        /* for(var i=0;i<7;i++){
             option.series[0].data[i].value = event.data[i];
         }*/
-        option.series[0].data =JSON.parse(event.data);
-        myChart.setOption(option, true);
+        // option.series[0].data =JSON.parse(event.data);
+        myChart.setOption({series:[{
+            data:JSON.parse(event.data)
+        }]});
     };
     //连接关闭的回调方法
     websocket.onclose = function () {
