@@ -1,4 +1,4 @@
-package com.monitor.controller;
+package com.monitor.webSocketServer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,19 +7,20 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * @author : ys
- * @date : 2019/4/19 15:50 星期五
+ * @date : 2019/4/23 18:52 星期二
  **/
 @Component
-@ServerEndpoint("/websocketServer")
-public class WebSocketServer {
-	private Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
+@ServerEndpoint("/lineWebsocket")
+public class LineWebSocket {
+	private Logger logger = LoggerFactory.getLogger(LineWebSocket.class);
 	//concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
 	// 若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
-	public static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<>();
+	public static CopyOnWriteArraySet<LineWebSocket> lineWebSocketSet = new CopyOnWriteArraySet<>();
 
 	//与某个客户端的连接会话，需要通过它来给客户端发送数据
 	private Session session;
@@ -30,9 +31,16 @@ public class WebSocketServer {
 	@OnOpen
 	public void onOpen(Session session) throws IOException {//todo 第一次需要从数据库查询last()最新的数据，填充到仪表板，接下来只需要等待更新推送
 		this.session = session;
-		webSocketSet.add(this);     //加入set中
-		logger.info("有新连接加入，当前连接数{}",webSocketSet.size());
-		sendMessage("9.5");//todo 第一次查数据并返回
+		lineWebSocketSet.add(this);     //加入set中
+		logger.info("有新连接加入，当前连接数{}",lineWebSocketSet.size());
+
+		//todo 第一次查数据并返回
+		ArrayDeque<Integer> deque = new ArrayDeque<>();
+		int b=200;
+		for(int i=0;i<60;i++){
+			deque.addLast(b);
+		}
+		sendMessage(deque.toString());
 	}
 
 	/**
@@ -40,8 +48,8 @@ public class WebSocketServer {
 	 */
 	@OnClose
 	public void onClose(){
-		webSocketSet.remove(this);  //从set中删除
-		logger.info("socket连接关闭！当前连接数{}",webSocketSet.size());
+		lineWebSocketSet.remove(this);  //从set中删除
+		logger.info("socket连接关闭！当前连接数{}",lineWebSocketSet.size());
 	}
 	/**
 	 * 收到客户端消息后调用的方法
@@ -52,7 +60,7 @@ public class WebSocketServer {
 	public void onMessage(String message, Session session) {//todo 应该用不到
 		System.out.println("来自客户端的消息:" + message);
 		//群发消息
-		for(WebSocketServer item: webSocketSet){
+		for(LineWebSocket item: lineWebSocketSet){
 			try {
 				item.sendMessage(message);
 			} catch (IOException e) {

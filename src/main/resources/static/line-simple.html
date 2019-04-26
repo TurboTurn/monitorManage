@@ -54,7 +54,6 @@
     //连接成功建立的回调方法
     websocket.onopen = function () {
         console.log("WebSocket连接成功");
-        websocket.send("line");
     };
     //接收到消息的回调方法
     websocket.onmessage = function (event) {

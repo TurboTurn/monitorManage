@@ -12,7 +12,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 @Configuration
 public class WebConfig {
 	@Bean
-	public ServerEndpointExporter serverEE(){
+	public ServerEndpointExporter serverEndpointExporter(){
 		return new ServerEndpointExporter();
 	}
 }
