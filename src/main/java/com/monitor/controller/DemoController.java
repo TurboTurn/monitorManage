@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 /**
  * @author : ys
@@ -23,9 +24,10 @@ public class DemoController {
 	double data = 10.50f;
 
 	@RequestMapping("demo")
-	public String fun(String name){
+	public String fun(String name){//echart.html
 		logger.info("传入参数为{}",name);
-		return "this a demo!";
+		int[] a={10,12,14,13,15,12,14};
+		return Arrays.toString(a);
 	}
 
 	@RequestMapping("/data")

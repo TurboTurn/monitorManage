@@ -1,17 +1,7 @@
 package com.monitor;
 
-import com.monitor.webSocketServer.LineWebSocket;
-import com.monitor.webSocketServer.WebSocketServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import static com.monitor.webSocketServer.LineWebSocket.lineWebSocketSet;
-import static com.monitor.webSocketServer.WebSocketServer.webSocketSet;
 
 /**
  * @author : ys
@@ -25,20 +15,19 @@ public class App {
 		SpringApplication.run(App.class, args);
 
 		//仪表板
-		new Thread(() -> {// todo 模拟推送数据线程，后期用opc收集数据，与上一次有变化时才推送
+		/*new Thread(() -> {// todo 模拟推送数据线程，后期用opc收集数据，与上一次有变化时才推送
 			double a = 12.1;
 			boolean flag = true;
 			while (true) {
-				for (WebSocketServer webSocket : webSocketSet) {
+				for (GaugeWebSocket webSocket : gaugeWebSockets) {
 					try {
 						String s = String.format("%.2f", a);
 						webSocket.sendMessage(s);
-						System.out.println("推送给" + webSocket + ":" + s);
+//						System.out.println("推送给" + webSocket + ":" + s);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-//				System.out.println();
 				try {
 					TimeUnit.SECONDS.sleep(2);
 					if (flag) {
@@ -52,9 +41,9 @@ public class App {
 					e.printStackTrace();
 				}
 			}
-		},"仪表板推送").start();
+		},"仪表板推送").start();*/
 		/*曲线图*/
-		new Thread(() -> {
+		/*new Thread(() -> {
 			ArrayDeque<Integer> deque = new ArrayDeque<>();
 			int b = 200;
 			Random random = new Random();
@@ -78,6 +67,6 @@ public class App {
 				}
 			}
 
-		},"曲线图推送").start();
+		},"曲线图推送").start();*/
 	}
 }

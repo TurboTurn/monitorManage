@@ -57,7 +57,7 @@
         }
     });*/
     // alert(ip);
-    var websocket = new WebSocket("ws://"+window.location.host+"/websocketServer");
+    var websocket = new WebSocket("ws://"+window.location.host+"/gaugeWebsocket");
 
     //连接成功建立的回调方法
     websocket.onopen = function () {

@@ -1,4 +1,4 @@
-package com.monitor.controller;
+package com.monitor.webSocketServer;
 
 import org.springframework.stereotype.Component;
 
