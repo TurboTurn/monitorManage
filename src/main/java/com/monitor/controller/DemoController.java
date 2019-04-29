@@ -24,41 +24,43 @@ public class DemoController {
 	double data = 10.50f;
 
 	@RequestMapping("demo")
-	public String fun(String name){//echart.html
-		logger.info("传入参数为{}",name);
-		int[] a={10,12,14,13,15,12,14};
+	public String fun(String name) {//echart.html
+		logger.info("传入参数为{}", name);
+		int[] a = {10, 12, 14, 13, 15, 12, 14};
 		return Arrays.toString(a);
 	}
 
 	@RequestMapping("/data")
-	public String fun1(){//返回String时不能执行toFixed
+	public String fun1() {//返回String时不能执行toFixed
 		data += 1.5;
-		String s = String.format("%.2f",data);
-		logger.info("返回值为{}",s);
+		String s = String.format("%.2f", data);
+		logger.info("返回值为{}", s);
 		return s;
 	}
+
 	@RequestMapping("/data1")
-	public double fun2(){
+	public double fun2() {
 		data += 1.5;
-		logger.info("返回值为{}",data);
+		logger.info("返回值为{}", data);
 		return data;
 	}
+
 	@RequestMapping("/lunxun")
 	public void fun3(HttpServletResponse response) throws IOException {
 //		while (true) {
-			data += 1.5;
+		data += 1.5;
 		PrintWriter out = response.getWriter();
 
-			for (int i=0;i<10;i++){
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				logger.info("返回值为{}", data);
-				out.println(data);
-				out.flush();
+		for (int i = 0; i < 10; i++) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
+			logger.info("返回值为{}", data);
+			out.println(data);
+			out.flush();
+		}
 
 
 //		}
@@ -66,15 +68,22 @@ public class DemoController {
 
 
 	@RequestMapping("/getIp")
-	public String grtIp(HttpServletRequest request, HttpServletResponse response){
-		String ip =request.getServerName();
+	public String grtIp(HttpServletRequest request, HttpServletResponse response) {
+		String ip = request.getServerName();
 		int port = request.getServerPort();
 		System.out.println(ip);
 		System.out.println(port);
-		return ip+":"+port;
+		return ip + ":" + port;
 	}
 
-
+	@RequestMapping("/getClientIp")
+	public String grtclientIp(HttpServletRequest request, HttpServletResponse response) {
+		String ip = request.getRemoteAddr();
+		System.out.println(request.getRemoteHost());
+		int port = request.getRemotePort();
+		System.out.println(ip + ":" + port);
+		return ip + ":" + port;
+	}
 
 
 }
