@@ -1,4 +1,8 @@
 import com.monitor.App;
+import com.monitor.dao.InfluxDao;
+import com.monitor.pojo.Table;
+import com.monitor.util.InfluxDBManager;
+import org.influxdb.impl.InfluxDBMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,13 +19,15 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
 /**
  * @author : ys
  * @date : 2019/4/15 19:06 星期一
  **/
-@SpringBootTest(classes = {App.class})
+@SpringBootTest(classes = {App.class},webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)//websocket需要server环境，不加会导致创建bean失败
 @RunWith(SpringRunner.class)
-@WebAppConfiguration
+//@WebAppConfiguration
 public class MockTest {
 	@Autowired
 	WebApplicationContext webApplicationContext;

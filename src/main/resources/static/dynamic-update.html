@@ -35,13 +35,13 @@
                 load: function () {
                     var series = this.series[0],
                         chart = this;
-                    activeLastPointToolip(chart);
-                    setInterval(function () {
+                    // activeLastPointToolip(chart);
+                    /*setInterval(function () {
                         var x = (new Date()).getTime(), // 当前时间
                             y = Math.random();          // 随机值
                         series.addPoint([x, y], true, true);
                         activeLastPointToolip(chart);
-                    }, 2000);
+                    }, 2000);*/
                 }
             }
         },
@@ -74,19 +74,19 @@
                 var data = [],
                     time = (new Date()).getTime(),
                     i;
-                for (i = -19; i <= 0; i += 1) {
+                /*for (i = -19; i <= 0; i += 1) {
                     data.push({
                         x: time + i * 2000,
                         y: Math.random()
                     });
-                }
+                }*/
                 return data;
             }())
         }]
     };
-    var chart = Highcharts.chart('container', option);
+    // var chart = Highcharts.chart('container', option);
 
-    var websocket = new WebSocket("ws://"+window.location.host+"/dynamicWebsocket");
+    var websocket = new WebSocket("ws://"+window.location.host+"/dynamicLine");
     //连接成功建立的回调方法
     websocket.onopen = function () {
         console.log("WebSocket连接成功");
@@ -97,9 +97,38 @@
              option.series[0].data[i].value = event.data[i];
          }*/
         // option.series[0].data =JSON.parse(event.data);
-        myChart.setOption({series:[{
+        /*myChart.setOption({series:[{
                 data:JSON.parse(event.data)
-            }]});
+            }]});*/
+        var data = JSON.parse(event.data);
+        if(data.status==='open'){
+            option.series[0].data=data.data;
+            Highcharts.chart('container',option);
+        }else if(data.status==='message'){
+            option.chart={
+                type: 'spline',
+                marginRight: 10,
+                events: {
+                    load: function () {
+                        var series = this.series[0],
+                            chart = this;
+                        // activeLastPointToolip(chart);
+                        // setInterval(function () {
+                            var x = (new Date()).getTime(), // 当前时间
+                                y = Math.random();          // 随机值
+                            series.addPoint([x, y], true, true);
+                            activeLastPointToolip(chart);
+                        // }, 2000);
+                    }
+                }
+            };
+            Highcharts.chart('container',option);
+           /* var x=data.data.x;
+            var y=data.data.y;
+            var series = option.series[0];
+            series.addPoint([x, y], true, true);
+            activeLastPointToolip(option);*/
+        }
     };
     //连接关闭的回调方法
     websocket.onclose = function () {

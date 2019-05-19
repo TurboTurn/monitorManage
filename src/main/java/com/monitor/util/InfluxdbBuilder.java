@@ -1,12 +1,10 @@
 package com.monitor.util;
 
-import com.monitor.pojo.Table2;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
-import org.influxdb.impl.InfluxDBMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -26,9 +24,10 @@ public class InfluxdbBuilder {
 	String username;
 	public static InfluxDB createInfluxDB(){
 		String url1 = "http://127.0.0.1:8086";
-		String url2 = "http://58.49.96.182:8086";
+		String url2 = "http://58.49.96.182:58086";
+		String url3 = "http://cloud.isyslab.info:58086";
 
-		InfluxDB influxDB = InfluxDBFactory.connect(url1,"root","admin");
+		InfluxDB influxDB = InfluxDBFactory.connect(url3,"root","admin");
 		influxDB.setDatabase("ys");
 		return influxDB;
 	}
@@ -63,36 +62,6 @@ public class InfluxdbBuilder {
 //		System.out.println(result);
 	}
 
-	/**
-	 * 查询
-	 */
-	@Test
-	public void select(){
-		InfluxDB influxDB = InfluxdbBuilder.createInfluxDB();
-		InfluxDBMapper mapper = new InfluxDBMapper(influxDB);
-		List<Table2> list = mapper.query(Table2.class);
-		for (Table2 model:list){
-			System.out.println(model);
-		}
-	}
-
-	/**
-	 * 对象插入
-	 */
-	@Test
-	public void singleInsert(){
-		InfluxDB influxDB = InfluxdbBuilder.createInfluxDB();
-		InfluxDBMapper mapper = new InfluxDBMapper(influxDB);
-		Table2 model = new Table2();
-//		model.setTime(Instant.now());
-		model.setHostname("localhost");
-		model.setHappyDevop(true);
-		model.setRegion("ezhou");
-		model.setIdle(15.34);
-		mapper.save(model);
-
-	}
-
 	@Test
 	public void insert() throws InterruptedException {
 
@@ -120,5 +89,6 @@ public class InfluxdbBuilder {
 	@Test
 	public void delayinsert(){
 		System.out.println(username);
+		System.out.println(10*Math.random());
 	}
 }

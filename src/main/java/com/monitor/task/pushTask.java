@@ -1,5 +1,8 @@
 package com.monitor.task;
 
+import com.alibaba.fastjson.JSON;
+import com.monitor.pojo.Point;
+import com.monitor.webSocketServer.DynamicLine;
 import com.monitor.webSocketServer.GaugeWebSocket;
 import com.monitor.webSocketServer.LineWebSocket;
 import org.slf4j.Logger;
@@ -14,8 +17,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 
+import static com.monitor.webSocketServer.DynamicLine.dynamicLines;
 import static com.monitor.webSocketServer.GaugeWebSocket.gaugeWebSockets;
 import static com.monitor.webSocketServer.LineWebSocket.lineWebSocketSet;
 
@@ -83,6 +88,18 @@ public class pushTask {
 		}
 		deque.removeFirst();
 		deque.addLast(300 + random.nextInt(100));//更新数据
+	}
+
+	@Async
+	@Scheduled(cron = "0/2 * * * * ?")
+	public void dynamicLine() throws IOException {
+		for (DynamicLine dynamicLine : dynamicLines){
+			HashMap<String,Object> map = new HashMap<>();
+			map.put("status","message");
+			Point point = new Point(new Date().getTime(),Math.random());
+			map.put("data",point);
+			dynamicLine.sendMessage(JSON.toJSONString(map));
+		}
 	}
 
 }

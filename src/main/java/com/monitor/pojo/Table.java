@@ -4,13 +4,14 @@ import org.influxdb.annotation.Column;
 import org.influxdb.annotation.Measurement;
 
 import java.time.Instant;
+import java.time.ZoneId;
 
 /**
  * @Author : ys
  * @Date : 2019/4/8 15:38 星期一
  **/
-@Measurement(name = "table2", database = "ys")
-public class Table2 {
+@Measurement(name = "table", database = "ys")
+public class Table {
 	@Column(name = "time")
 	private Instant time;
 	@Column(name = "host", tag = true)
@@ -22,8 +23,11 @@ public class Table2 {
 	@Column(name = "idle")
 	private Double idle;
 
+//	public Instant getTime() {
+//		return time;
+//	}
 	public Instant getTime() {
-		return time;
+		return time.atZone(ZoneId.of(ZoneId.SHORT_IDS.get("CTT"))).toInstant();
 	}
 
 	public void setTime(Instant time) {

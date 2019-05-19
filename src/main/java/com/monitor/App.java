@@ -2,6 +2,7 @@ package com.monitor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author : ys
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * RestController等价于@Controller和@ResponseBody
  **/
 @SpringBootApplication
+@ComponentScan(basePackages = "com.monitor.*")//不指明单元测试会报错
 public class App {
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);

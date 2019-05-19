@@ -12,7 +12,7 @@ import org.springframework.web.context.WebApplicationContext;
  * @author : ys
  * @date : 2019/4/15 15:46 星期一
  **/
-@SpringBootTest(classes = {App.class})
+@SpringBootTest(classes = {App.class},webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 @PropertySource("classpath:influxDB.properties")
 public class TestDemo {
