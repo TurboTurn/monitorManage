@@ -10,7 +10,7 @@ import java.time.ZoneId;
  * @Author : ys
  * @Date : 2019/4/8 15:38 星期一
  **/
-@Measurement(name = "table", database = "ys")
+@Measurement(name = "table1", database = "ys")
 public class Table {
 	@Column(name = "time")
 	private Instant time;
@@ -68,7 +68,7 @@ public class Table {
 
 	@Override
 	public String toString() {
-		return "Table2{" +
+		return "Table{" +
 				"time=" + time +
 				", hostname='" + hostname + '\'' +
 				", region='" + region + '\'' +

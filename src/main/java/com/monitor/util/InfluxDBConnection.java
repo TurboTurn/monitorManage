@@ -166,16 +166,6 @@ public class InfluxDBConnection {
 		influxDB.write(database, retentionPolicy, consistency, records);
 	}
 
-	/**
-	 * 删除
-	 *
-	 * @param command  删除语句
-	 * @return 返回错误信息
-	 */
-	public String deleteMeasurementData(String command) {
-		QueryResult result = influxDB.query(new Query(command, database));
-		return result.getError();
-	}
 
 
 

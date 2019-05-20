@@ -2,8 +2,6 @@ package com.monitor.util;
 
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
-import org.influxdb.dto.Query;
-import org.influxdb.dto.QueryResult;
 import org.influxdb.impl.InfluxDBMapper;
 
 /**
@@ -23,10 +21,14 @@ public class InfluxDBManager {
 	 * 所以在这里，JVM帮助我们保证了线程的安全性，在类进行初始化时，别的线程是无法进入的。
 	 * 优点：避免了线程不安全，延迟加载，效率高。
 	 */
-	private static class InfluxInstance{
-		static String url3 = "http://cloud.isyslab.info:58086";
+	private static class InfluxInstance{//单例influxDB
+		private static String url3 = "http://cloud.isyslab.info:58086";
 		private static final InfluxDB influxDB =
 				InfluxDBFactory.connect(url3, "root", "admin");
+	}
+
+	private static class MapperInstance{//单例mapper
+		private static final InfluxDBMapper mapper = new InfluxDBMapper(InfluxInstance.influxDB);
 	}
 
 	public static InfluxDB getInfluxDB() {
@@ -34,10 +36,8 @@ public class InfluxDBManager {
 	}
 
 	public static InfluxDBMapper getInfluxDBMapper(){
-		return new InfluxDBMapper(InfluxInstance.influxDB);
+		return MapperInstance.mapper;
 	}
 
-	public static QueryResult query(Query query){
-		return InfluxInstance.influxDB.query(query);
-	}
+
 }

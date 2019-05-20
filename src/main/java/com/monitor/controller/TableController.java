@@ -23,4 +23,8 @@ public class TableController {
 	public List<Table> getAll(){
 		return tableService.selectAll();
 	}
+	@RequestMapping("/last")
+	public Table getLast(){
+		return tableService.getLast();
+	}
 }

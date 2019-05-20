@@ -1,5 +1,5 @@
 import com.monitor.App;
-import com.monitor.dao.InfluxDao;
+import com.monitor.dao.TableDao;
 import com.monitor.pojo.Table;
 import com.monitor.service.TableService;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class InfluxDBTest {
 	@Autowired
 	TableService tableService;
 	@Autowired
-	InfluxDao influxDao;
+	TableDao tableDao;
 
 	/**
 	 * 查询全部数据
@@ -35,7 +35,7 @@ public class InfluxDBTest {
 	}
 	@Test
 	public void selectAll1(){
-		List<Table> list1 = influxDao.selectAll(Table.class);
+		List<Table> list1 = tableDao.selectAll();
 		for (Table model:list1){
 			System.out.println(model);
 		}
