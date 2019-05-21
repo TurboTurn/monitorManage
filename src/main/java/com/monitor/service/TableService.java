@@ -29,4 +29,12 @@ public class TableService {
 		return tableDao.getLast();
 	}
 
+	public List<Table> pageQuery(int pageSize, int pageNo) {
+		return tableDao.pageQuery(pageSize,pageNo);
+	}
+
+	public int count(){
+		return tableDao.count();
+	}
+
 }

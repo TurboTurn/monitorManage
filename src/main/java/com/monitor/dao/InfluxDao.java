@@ -6,7 +6,6 @@ import org.influxdb.annotation.Measurement;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.influxdb.impl.InfluxDBMapper;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -20,13 +19,13 @@ import java.util.List;
 //@Component
 public class InfluxDao<T> {
 
-	 final InfluxDBMapper mapper = InfluxDBManager.getInfluxDBMapper();
-	private final InfluxDB influxDB = InfluxDBManager.getInfluxDB();
+	final InfluxDBMapper mapper = InfluxDBManager.getInfluxDBMapper();
+	final InfluxDB influxDB = InfluxDBManager.getInfluxDB();
 
-	 String database;
-	 String measurement;
+	String database;
+	String measurement;
 
-	 Class<T> clazz;
+	Class<T> clazz;
 
 	public InfluxDao() {
 		// this表示的子类，c表示就是CustomerDaoImpl的Class对象
@@ -36,7 +35,7 @@ public class InfluxDao<T> {
 		Type type = c.getGenericSuperclass();
 
 		// 目的：把type接口转换成子接口
-		if(type instanceof ParameterizedType) {
+		if (type instanceof ParameterizedType) {
 			ParameterizedType ptype = (ParameterizedType) type;
 			// 获取到 Customer
 			Type[] types = ptype.getActualTypeArguments();
@@ -51,6 +50,7 @@ public class InfluxDao<T> {
 	private String getDatabaseName(final Class<T> clazz) {
 		return clazz.getAnnotation(Measurement.class).database();
 	}
+
 	private String getMeasurementName(final Class<T> clazz) {
 		return clazz.getAnnotation(Measurement.class).name();
 	}
@@ -58,6 +58,7 @@ public class InfluxDao<T> {
 
 	/**
 	 * 获取最后一条记录//todo 移到子类
+	 *
 	 * @return
 	 */
 	public T getLast() {
@@ -70,6 +71,7 @@ public class InfluxDao<T> {
 
 	/**
 	 * 查询全部数据
+	 *
 	 * @return
 	 */
 	public List<T> selectAll() {
@@ -78,6 +80,7 @@ public class InfluxDao<T> {
 
 	/**
 	 * 分页查询
+	 *
 	 * @param pageSize
 	 * @param pageNo
 	 * @return
@@ -93,15 +96,17 @@ public class InfluxDao<T> {
 
 	/**
 	 * 插入一条对象记录
+	 *
 	 * @param t
 	 */
-	public void save(T t){
+	public void save(T t) {
 		mapper.save(t);
 	}
 
 
 	/**
 	 * 删除表
+	 *
 	 * @return
 	 */
 	public boolean dropMeasurement() {
@@ -114,10 +119,11 @@ public class InfluxDao<T> {
 
 	/**
 	 * 执行查询语句
+	 *
 	 * @param query
 	 * @return
 	 */
-	public QueryResult query(final Query query){
+	public QueryResult query(final Query query) {
 		return influxDB.query(query);
 	}
 }
