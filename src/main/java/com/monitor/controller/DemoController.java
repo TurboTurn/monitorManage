@@ -3,6 +3,7 @@ package com.monitor.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,19 +19,20 @@ import java.util.Arrays;
  **/
 @CrossOrigin
 @RestController
+@RequestMapping("/demo")
 public class DemoController {
 	private Logger logger = LoggerFactory.getLogger(DemoController.class);
 
 	double data = 10.50f;
 
-	@RequestMapping("demo")
+	@GetMapping("demo")
 	public String fun(String name) {//echart.html
 		logger.info("传入参数为{}", name);
 		int[] a = {10, 12, 14, 13, 15, 12, 14};
 		return Arrays.toString(a);
 	}
 
-	@RequestMapping("/data")
+	@GetMapping("/data")
 	public String fun1() {//返回String时不能执行toFixed
 		data += 1.5;
 		String s = String.format("%.2f", data);
@@ -38,14 +40,14 @@ public class DemoController {
 		return s;
 	}
 
-	@RequestMapping("/data1")
+	@GetMapping("/data1")
 	public double fun2() {
 		data += 1.5;
 		logger.info("返回值为{}", data);
 		return data;
 	}
 
-	@RequestMapping("/lunxun")
+	@GetMapping("/lunxun")
 	public void fun3(HttpServletResponse response) throws IOException {
 //		while (true) {
 		data += 1.5;
@@ -67,7 +69,7 @@ public class DemoController {
 	}
 
 
-	@RequestMapping("/getIp")
+	@GetMapping("/getIp")
 	public String grtIp(HttpServletRequest request, HttpServletResponse response) {
 		String ip = request.getServerName();
 		int port = request.getServerPort();
@@ -76,7 +78,7 @@ public class DemoController {
 		return ip + ":" + port;
 	}
 
-	@RequestMapping("/getClientIp")
+	@GetMapping("/getClientIp")
 	public String grtclientIp(HttpServletRequest request, HttpServletResponse response) {
 		String ip = request.getRemoteAddr();
 		System.out.println(request.getRemoteHost());

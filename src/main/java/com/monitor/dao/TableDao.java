@@ -21,6 +21,7 @@ public class TableDao extends InfluxDao<Table> {
 
 	/**
 	 * 获取最后一条记录
+	 *
 	 * @return
 	 */
 	public Table getLast() {
@@ -32,14 +33,15 @@ public class TableDao extends InfluxDao<Table> {
 
 	/**
 	 * 返回一个（field）字段中的非空值的数量。
+	 *
 	 * @return
 	 */
-	public int count(){
-		String sql = "select count(idle) from table1";
-		Query query = new Query(sql,"ys");
+	public int count() {
+		String sql = "select count(idle) from " + measurement;
+		Query query = new Query(sql, database);
 		QueryResult result = influxDB.query(query);
 		//QueryResult [results=[Result [series=[Series [name=table1, tags=null, columns=[time, count], values=[[1970-01-01T00:00:00Z, 24.0]]]], error=null]], error=null]
-		double count = (double)result.getResults().get(0).getSeries().get(0).getValues().get(0).get(1);
-		return (int)count;
+		double count = (double) result.getResults().get(0).getSeries().get(0).getValues().get(0).get(1);
+		return (int) count;
 	}
 }
