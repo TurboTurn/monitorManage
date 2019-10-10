@@ -6,7 +6,6 @@ import org.influxdb.annotation.Measurement;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.influxdb.impl.InfluxDBMapper;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -17,7 +16,7 @@ import java.util.List;
  * @date : 2019/4/16 15:12 星期二
  **/
 
-@Component
+//@Component	//不注释启动会报错，创建实例空指针异常
 public class InfluxDao<T> {
 
 	final InfluxDBMapper mapper = InfluxDBManager.getInfluxDBMapper();

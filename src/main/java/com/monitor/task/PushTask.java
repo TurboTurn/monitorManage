@@ -9,12 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,29 +28,17 @@ import static com.monitor.webSocketServer.LineWebSocket.lineWebSocketSet;
  * @date : 2019/4/26 9:12 星期五
  **/
 @Component
-//@EnableScheduling
-@EnableAsync
-public class pushTask {
-	private Logger logger = LoggerFactory.getLogger(pushTask.class);
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+@EnableScheduling    //该注释必须至少出现一次，才会Initializing ExecutorService 'taskScheduler'，任务才会执行
+@EnableAsync    //同上，此外，不开启的话，所有任务共用scheduling-1单个线程去运行任务，会导致其他任务受影响
+public class PushTask {
+	private Logger logger = LoggerFactory.getLogger(PushTask.class);
 	//多个Schedule只用一个线程schedule-1
 	//基于注解@Scheduled默认为单线程，开启多个任务时，任务的执行时机会受上一个任务执行时间的影响
 	//添加Async改为多线程
 
-	@Async
-//	@Scheduled(fixedRate = 5000)
-	public void reportCurrent() {
-		logger.info("{},当前时间{}", Thread.currentThread().getName(), dateFormat.format(new Date()));
-	}
-
-	@Async
-//	@Scheduled(cron = "0/5 * * * * ?")
-	public void printTime() {
-		logger.info("{} {}", Thread.currentThread().getName(), LocalDateTime.now().toString());
-	}
 
 	/**
-	 * 仪表板推送
+	 * 仪表盘推送
 	 */
 	private double a = 12.1;
 	private boolean flag = true;
@@ -66,7 +53,9 @@ public class pushTask {
 		}
 		a += flag ? 1.32 : -1.32;
 		flag = ! flag;
-	}//仪表板结束
+	}//仪表盘结束
+
+
 
 	/**
 	 * 曲线图推送
@@ -88,7 +77,7 @@ public class pushTask {
 		}
 		deque.removeFirst();
 		deque.addLast(300 + random.nextInt(100));//更新数据
-	}
+	}//曲线图结束
 
 	@Async
 	@Scheduled(cron = "0/2 * * * * ?")

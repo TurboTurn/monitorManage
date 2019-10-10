@@ -18,66 +18,11 @@ public class App {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("系统启动完成");
+		System.out.println("系统初始化完成");
 	}
 
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
-
-		//仪表板
-		/*new Thread(() -> {// todo 模拟推送数据线程，后期用opc收集数据，与上一次有变化时才推送
-			double a = 12.1;
-			boolean flag = true;
-			while (true) {
-				for (GaugeWebSocket webSocket : gaugeWebSockets) {
-					try {
-						String s = String.format("%.2f", a);
-						webSocket.sendMessage(s);
-//						System.out.println("推送给" + webSocket + ":" + s);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				try {
-					TimeUnit.SECONDS.sleep(2);
-					if (flag) {
-						a += 1.32;
-						flag = false;
-					} else {
-						a -= 1.31;
-						flag = true;
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		},"仪表板推送").start();*/
-		/*曲线图*/
-		/*new Thread(() -> {
-			ArrayDeque<Integer> deque = new ArrayDeque<>();
-			int b = 200;
-			Random random = new Random();
-			for (int i = 0; i < 60; i++) {
-				deque.addLast(b + random.nextInt(100));
-			}
-			while (true) {
-				for (LineWebSocket lineWebSocket : lineWebSocketSet) {
-					try {
-						lineWebSocket.sendMessage(deque.toString());//推送数据
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				deque.removeFirst();
-				deque.addLast(300 + new Random().nextInt(100));//更新数据
-				try {
-					TimeUnit.SECONDS.sleep(2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-
-		},"曲线图推送").start();*/
 	}
 }
