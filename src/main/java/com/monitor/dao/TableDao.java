@@ -1,9 +1,8 @@
 package com.monitor.dao;
 
-import com.monitor.pojo.Table;
+import com.monitor.measurement.Table;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
-import org.junit.Test;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

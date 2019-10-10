@@ -1,7 +1,7 @@
 package com.monitor.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -14,7 +14,7 @@ import java.util.Map;
  **/
 @Controller
 public class TemplateController {
-	@RequestMapping("/websocket")
+	@GetMapping("/websocket")
 	public String socket(Map<String,Object> map, HttpServletRequest request) throws UnknownHostException {
 //		String ip =request.getLocalName();
 		String ip = InetAddress.getLocalHost().getHostAddress();

@@ -1,7 +1,6 @@
 import com.monitor.App;
 import com.monitor.dao.TableDao;
-import com.monitor.pojo.Table;
-import com.monitor.service.TableService;
+import com.monitor.measurement.Table;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +18,11 @@ import java.util.List;
 public class InfluxDBTest {
 
 	@Autowired
-	TableService tableService;
-	@Autowired
 	TableDao tableDao;
 
 	/**
 	 * 查询全部数据
 	 */
-	@Test
-	public void selectAll(){
-		List<Table> list1 = tableService.selectAll();
-		for (Table model:list1){
-			System.out.println(model);
-		}
-	}
 	@Test
 	public void selectAll1(){
 		List<Table> list1 = tableDao.selectAll();

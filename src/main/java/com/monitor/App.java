@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import javax.annotation.PostConstruct;
+
 /**
  * @author : ys
  * @date : 2019/4/15 15:15 星期一
@@ -13,6 +15,13 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.monitor.*")//不指明单元测试会报错
 public class App {
+
+	@PostConstruct
+	public void init() {
+		System.out.println("系统启动完成");
+	}
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 

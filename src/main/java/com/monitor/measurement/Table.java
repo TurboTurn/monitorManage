@@ -1,4 +1,4 @@
-package com.monitor.pojo;
+package com.monitor.measurement;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

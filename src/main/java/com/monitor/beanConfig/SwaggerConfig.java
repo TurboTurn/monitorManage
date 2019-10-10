@@ -1,4 +1,4 @@
-package com.monitor.config;
+package com.monitor.beanConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -6,7 +6,6 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -46,7 +45,7 @@ public class SwaggerConfig {
 				.title("monitorSystem RESTful APIs")
 				.description("监控系统api")
 //				.termsOfServiceUrl("http://www.baidu.com")
-				.contact(new Contact("stephen","https://github.com/TurboTurn","eassor@foxmail.com"))
+//				.contact(new Contact("stephen","https://github.com/TurboTurn","eassor@foxmail.com"))
 				.version("1.0")
 				.build();
 	}

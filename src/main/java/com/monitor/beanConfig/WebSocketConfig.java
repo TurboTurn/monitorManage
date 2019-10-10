@@ -1,4 +1,4 @@
-package com.monitor.config;
+package com.monitor.beanConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  * webSocket与springBoot集成的配置
  **/
 @Configuration
-public class WebConfig {
+public class WebSocketConfig {
 	@Bean
 	public ServerEndpointExporter serverEndpointExporter(){
 		return new ServerEndpointExporter();

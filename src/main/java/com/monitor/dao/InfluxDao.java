@@ -6,6 +6,7 @@ import org.influxdb.annotation.Measurement;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.influxdb.impl.InfluxDBMapper;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -16,7 +17,7 @@ import java.util.List;
  * @date : 2019/4/16 15:12 星期二
  **/
 
-//@Component
+@Component
 public class InfluxDao<T> {
 
 	final InfluxDBMapper mapper = InfluxDBManager.getInfluxDBMapper();
@@ -56,17 +57,6 @@ public class InfluxDao<T> {
 	}
 
 
-	/**
-	 * 获取最后一条记录//todo 移到子类
-	 *
-	 * @return
-	 */
-	public T getLast() {
-		String sql = String.format("select last(idle) as idle,host,region from %s", measurement);
-		Query query = new Query(sql, database);
-		List<T> list = mapper.query(query, clazz);
-		return list.get(0);
-	}
 
 
 	/**
@@ -87,7 +77,6 @@ public class InfluxDao<T> {
 	 */
 	public List<T> pageQuery(int pageSize, int pageNo) {
 		String sql = String.format("select * from %s limit %d offset %d", measurement, pageSize, pageSize * (pageNo - 1));
-//		String sql1 = "select * from " + measurement + " limit " + pageSize + " offset " + pageSize*(pageNo-1);
 		String database = getDatabaseName(clazz);
 		Query query = new Query(sql, database);
 		return mapper.query(query, clazz);

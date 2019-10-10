@@ -1,7 +1,7 @@
 package com.monitor.controller;
 
-import com.monitor.pojo.Table;
-import com.monitor.service.TableService;
+import com.monitor.dao.TableDao;
+import com.monitor.measurement.Table;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,16 +19,16 @@ import java.util.List;
 @RequestMapping("/table")
 @Api(description = "table表相关接口")
 public class TableController {
-	private final TableService tableService;
+	private final TableDao tableDao;
 
-	public TableController(TableService tableService) {
-		this.tableService = tableService;
+	public TableController(TableDao tableDao) {
+		this.tableDao = tableDao;
 	}
 
 	@ApiOperation(value = "查询所有数据")
 	@GetMapping("/all")
 	public List<Table> getAll(){
-		return tableService.selectAll();
+		return tableDao.selectAll();
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class TableController {
 	@ApiOperation(value = "查询最新",notes = "查询最新一条数据")
 	@GetMapping("/last")
 	public Table getLast(){
-		return tableService.getLast();
+		return tableDao.getLast();
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class TableController {
 	@ApiOperation(value = "分页查询",notes = "传入分页参数查询列表")
 	@GetMapping("/list")
 	public List<Table> list(@RequestParam Integer ps, @RequestParam Integer pno){
-		return tableService.pageQuery(ps,pno);
+		return tableDao.pageQuery(ps, pno);
 	}
 
 	/**
@@ -60,6 +60,6 @@ public class TableController {
 	@ApiOperation(value = "查询总数",notes = "查询表里field字段的总记录数")
 	@GetMapping("/count")
 	public int count(){
-		return tableService.count();
+		return tableDao.count();
 	}
 }

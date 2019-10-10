@@ -1,6 +1,5 @@
-import com.monitor.dao.InfluxDao;
 import com.monitor.dao.TableDao;
-import com.monitor.pojo.Table;
+import com.monitor.measurement.Table;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,7 +9,8 @@ import java.util.List;
  * @date : 2019/5/20 11:08 星期一
  **/
 public class DaoTest {
-	private InfluxDao<Table> influxDao = new InfluxDao<>();
+	//	private InfluxDao<Table> influxDao = new InfluxDao<>();
+	private TableDao influxDao = new TableDao();
 
 	@Test
 	public void drop() {
@@ -25,8 +25,7 @@ public class DaoTest {
 
 	@Test
 	public void getLast() {
-		TableDao tableDao = new TableDao();
-		System.out.println(tableDao.getLast());
+		System.out.println(influxDao.getLast());
 	}
 
 	public static void main(String[] args) {

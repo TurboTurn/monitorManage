@@ -1,4 +1,3 @@
-/*
 package com.monitor.ActiveMQ;
 
 import org.slf4j.Logger;
@@ -11,12 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.jms.Destination;
 
-*/
 /**
  * @author : ys
  * @date : 2019/4/15 16:13 星期一
  * Spring Boot 内置了ActiveMQ 的服务，在主类声明Bean
- **//*
+ **/
 
 
 @RestController
@@ -44,4 +42,4 @@ public class QueueController {
 	}
 
 }
-*/
+
