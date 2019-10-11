@@ -36,8 +36,8 @@
             {
                 name: '业务指标',
                 type: 'gauge',
-                detail: {formatter: '{value}%'},
-                data: [{value: 0, name: '完成率'}]
+                detail: {formatter: '{value} KPa'},
+                data: [{value: 0, name: '当前压力'}]
             }
         ]
     };

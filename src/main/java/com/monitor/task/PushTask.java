@@ -8,12 +8,9 @@ import com.monitor.webSocketServer.LineWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,14 +25,15 @@ import static com.monitor.webSocketServer.LineWebSocket.lineWebSocketSet;
  * @date : 2019/4/26 9:12 星期五
  **/
 @Component
-@EnableScheduling    //该注释必须至少出现一次，才会Initializing ExecutorService 'taskScheduler'，任务才会执行
-@EnableAsync    //同上，此外，不开启的话，所有任务共用scheduling-1单个线程去运行任务，会导致其他任务受影响
 public class PushTask {
 	private Logger logger = LoggerFactory.getLogger(PushTask.class);
 	//多个Schedule只用一个线程schedule-1
 	//基于注解@Scheduled默认为单线程，开启多个任务时，任务的执行时机会受上一个任务执行时间的影响
 	//添加Async改为多线程
 
+//	@Resource(name = "pushThreadPool")
+/*	@Autowired
+	TaskExecutor pushThreadPool;*/
 
 	/**
 	 * 仪表盘推送
@@ -43,15 +41,15 @@ public class PushTask {
 	private double a = 12.1;
 	private boolean flag = true;
 
-	@Async
+	@Async(value = "pushThreadPool")
 	@Scheduled(cron = "0/2 * * * * ?")
-	public void gauge() throws IOException {
+	public void gauge() {
 		for (GaugeWebSocket webSocket : gaugeWebSockets) {
 			String s = String.format("%.2f", a);
 			webSocket.sendMessage(s);
 //			logger.info("线程{}推送仪表板数据{}",Thread.currentThread().getName(),webSocket);
 		}
-		a += flag ? 1.32 : -1.32;
+		a += flag ? 1.32 : -1.31;
 		flag = ! flag;
 	}//仪表盘结束
 
@@ -68,9 +66,10 @@ public class PushTask {
 			deque.addLast(b + random.nextInt(100));
 		}
 	}
-	@Async
+
+	@Async(value = "pushThreadPool")
 	@Scheduled(cron = "0/2 * * * * ?")
-	public void line() throws IOException {
+	public void line() {
 		for (LineWebSocket lineWebSocket : lineWebSocketSet) {
 			lineWebSocket.sendMessage(deque.toString());//推送数据
 //			logger.info("线程{}推送曲线数据{}",Thread.currentThread().getName(),lineWebSocket);
@@ -79,9 +78,9 @@ public class PushTask {
 		deque.addLast(300 + random.nextInt(100));//更新数据
 	}//曲线图结束
 
-	@Async
+	@Async(value = "pushThreadPool")
 	@Scheduled(cron = "0/2 * * * * ?")
-	public void dynamicLine() throws IOException {
+	public void dynamicLine() {
 		for (DynamicLine dynamicLine : dynamicLines){
 			HashMap<String,Object> map = new HashMap<>();
 			map.put("status","message");

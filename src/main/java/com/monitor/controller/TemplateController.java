@@ -23,4 +23,10 @@ public class TemplateController {
 		map.put("ip",ip+":"+port);
 		return "websocket";
 	}
+
+	@GetMapping("/testException")
+	public Integer test() {
+		int a = 1 / 0;
+		return a;
+	}
 }

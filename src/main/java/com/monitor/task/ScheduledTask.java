@@ -14,8 +14,6 @@ import java.util.Date;
  * @date : 2019/4/26 9:12 星期五
  **/
 @Component
-//@EnableScheduling	//此处不需要，使用一次即可
-//@EnableAsync
 public class ScheduledTask {
 	private Logger logger = LoggerFactory.getLogger(ScheduledTask.class);
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -23,13 +21,13 @@ public class ScheduledTask {
 	//基于注解@Scheduled默认为单线程，开启多个任务时，任务的执行时机会受上一个任务执行时间的影响
 	//添加Async改为多线程
 
-	@Async
+	@Async(value = "pushThreadPool")
 //	@Scheduled(fixedRate = 5000)	//注释该注解表示关闭任务
 	public void reportCurrent(){
 		logger.info("{},当前时间{}",Thread.currentThread().getName(),dateFormat.format(new Date()));
 	}
 
-	@Async
+	@Async(value = "pushThreadPool")
 //	@Scheduled(cron = "0/5 * * * * ?")
 	public void printTime() {
 		logger.info("{} {}",Thread.currentThread().getName(),LocalDateTime.now().toString());

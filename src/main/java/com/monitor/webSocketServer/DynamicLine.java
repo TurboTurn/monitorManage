@@ -1,8 +1,6 @@
 package com.monitor.webSocketServer;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monitor.pojo.Point;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +27,7 @@ public class DynamicLine {
 
 	public static CopyOnWriteArraySet<DynamicLine> dynamicLines = new CopyOnWriteArraySet<>();
 
-	//与某个客户端的连接会话，需要通过它来给客户端发送数据
-	private Session session;
+	private Session session;//与某个客户端的连接会话，需要通过它来给客户端发送数据
 
 	/**
 	 * 连接建立成功调用的方法
@@ -58,7 +55,7 @@ public class DynamicLine {
 	}
 
 	//	@Test
-	public static void main(String[] args) throws JsonProcessingException {
+	public static void main(String[] args) {
 
 //		ObjectMapper mapper = new ObjectMapper();
 //		String json = mapper.writeValueAsString(list);
@@ -92,16 +89,7 @@ public class DynamicLine {
 	 */
 	@OnMessage
 	public void onMessage(String message, Session session) {//todo 应该用不到
-		System.out.println("来自客户端的消息:" + message);
-		//群发消息
-		for (DynamicLine item : dynamicLines) {
-			try {
-				item.sendMessage(message);
-			} catch (IOException e) {
-				e.printStackTrace();
-				continue;
-			}
-		}
+
 	}
 
 	/**
@@ -116,8 +104,12 @@ public class DynamicLine {
 		error.printStackTrace();
 	}
 
-	public void sendMessage(String message) throws IOException {
-		this.session.getBasicRemote().sendText(message);
-		//this.session.getAsyncRemote().sendText(message);
+	public void sendMessage(String message) {
+		try {
+			this.session.getBasicRemote().sendText(message);
+			//this.session.getAsyncRemote().sendText(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
