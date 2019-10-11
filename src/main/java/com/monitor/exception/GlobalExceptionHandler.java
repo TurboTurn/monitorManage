@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = Exception.class)  //申明捕获哪个异常类
 	@ResponseBody  //返回给浏览器的是一个json格式，上面又没有@RestController，所以在此申明@ResponseBody
-	public Map handle(Exception e) {
+	public Map defaultExceptionHandler(Exception e) {
 		Map<String, Object> result = new HashMap<>();
 		result.put("errMessage", e.getMessage());
 		logger.error("【系统异常】", e);
