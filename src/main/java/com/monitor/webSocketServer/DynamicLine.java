@@ -100,8 +100,7 @@ public class DynamicLine {
 	 */
 	@OnError
 	public void onError(Session session, Throwable error) {
-		System.out.println("socket发生错误");
-		error.printStackTrace();
+		logger.error("webSocket发生错误:{}", error.toString());
 	}
 
 	public void sendMessage(String message) {

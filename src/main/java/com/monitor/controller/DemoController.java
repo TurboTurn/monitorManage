@@ -73,17 +73,17 @@ public class DemoController {
 	public String grtIp(HttpServletRequest request, HttpServletResponse response) {
 		String ip = request.getServerName();
 		int port = request.getServerPort();
-		System.out.println(ip);
-		System.out.println(port);
+		logger.debug(ip);
+		logger.debug(""+port);
 		return ip + ":" + port;
 	}
 
 	@GetMapping("/getClientIp")
 	public String grtclientIp(HttpServletRequest request, HttpServletResponse response) {
 		String ip = request.getRemoteAddr();
-		System.out.println(request.getRemoteHost());
+		logger.debug(request.getRemoteHost());
 		int port = request.getRemotePort();
-		System.out.println(ip + ":" + port);
+		logger.debug(ip + ":" + port);
 		return ip + ":" + port;
 	}
 

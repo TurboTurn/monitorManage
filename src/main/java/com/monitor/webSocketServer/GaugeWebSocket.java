@@ -54,7 +54,7 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 	 */
 	@OnMessage
 	public void onMessage(String message, Session session) {//todo 应该用不到
-		System.out.println("来自客户端的消息:" + message);
+		logger.info("来自客户端的消息:" + message);
 	}
 
 	/**
@@ -64,8 +64,8 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 	 */
 	@OnError
 	public void onError(Session session, Throwable error){
-		System.out.println("发生错误");
-		error.printStackTrace();
+		logger.error("webSocket发生错误:{}", error.toString());
+//		error.printStackTrace();//不打印错误堆栈，在微信打开网页然后关闭会报错
 	}
 
 
@@ -73,7 +73,7 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 		try {
 			this.session.getBasicRemote().sendText(message);
 			//this.session.getAsyncRemote().sendText(message);
-			logger.info("{}推送了消息{}, {}", Thread.currentThread().getName(), message, LocalDateTime.now().toString());
+			logger.debug("{}推送了消息{}, {}", Thread.currentThread().getName(), message, LocalDateTime.now().toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
