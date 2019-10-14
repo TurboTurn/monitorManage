@@ -23,8 +23,9 @@ public class InfluxDBManager {
 	 */
 	private static class InfluxInstance{//单例influxDB
 		private static String url3 = "http://cloud.isyslab.info:58086";
+		private static String url = "http://stephenyi.cn:8086";
 		private static final InfluxDB influxDB =
-				InfluxDBFactory.connect(url3, "root", "admin");
+				InfluxDBFactory.connect(url, "root", "admin");
 	}
 
 	private static class MapperInstance{//单例mapper

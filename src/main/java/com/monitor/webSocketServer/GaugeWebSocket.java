@@ -1,5 +1,6 @@
 package com.monitor.webSocketServer;
 
+import com.monitor.dao.PressureDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
@@ -26,6 +26,8 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 
 	private Session session;//与某个客户端的连接会话，需要通过它来给客户端发送数据
 
+//	@Autowired
+	final PressureDao pressureDao = new PressureDao();
 
 	/**
 	 * 连接建立成功调用的方法
@@ -36,7 +38,7 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 		this.session = session;
 		gaugeWebSockets.add(this);     //加入set中
 		logger.info("有新连接加入，当前连接数{}", gaugeWebSockets.size());
-		sendMessage("9.5");//todo 第一次查数据并返回
+		sendMessage(String.format("%.2f", pressureDao.getLast().getPressure()));//todo 第一次查数据并返回
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 	@OnError
 	public void onError(Session session, Throwable error){
 		logger.error("webSocket发生错误:{}", error.toString());
-//		error.printStackTrace();//不打印错误堆栈，在微信打开网页然后关闭会报错
+		error.printStackTrace();//不打印错误堆栈，在微信打开网页然后关闭会报错
 	}
 
 
@@ -73,7 +75,7 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 		try {
 			this.session.getBasicRemote().sendText(message);
 			//this.session.getAsyncRemote().sendText(message);
-			logger.debug("{}推送了消息{}, {}", Thread.currentThread().getName(), message, LocalDateTime.now().toString());
+//			logger.info("{}推送了仪表盘消息{}, {}", Thread.currentThread().getName(), message, LocalDateTime.now().toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

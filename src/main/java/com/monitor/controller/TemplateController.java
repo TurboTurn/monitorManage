@@ -4,8 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Map;
 
 /**
@@ -14,18 +12,13 @@ import java.util.Map;
  **/
 @Controller
 public class TemplateController {
-	@GetMapping("/websocket")
-	public String socket(Map<String,Object> map, HttpServletRequest request) throws UnknownHostException {
-//		String ip =request.getLocalName();
-		String ip = InetAddress.getLocalHost().getHostAddress();
-		int port = request.getLocalPort();
-		System.out.println(ip+":"+port);
-		map.put("ip",ip+":"+port);
-		return "websocket";
+	@GetMapping("/gauge")
+	public String socket(Map<String,Object> map, HttpServletRequest request)  {
+		return "gauge";
 	}
 
 	@GetMapping("/testException")
-	public Integer test() {
+	public Integer test() {//模拟异常，使用全局异常处理器
 		int a = 1 / 0;
 		return a;
 	}

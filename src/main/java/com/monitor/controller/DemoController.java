@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,27 +63,7 @@ public class DemoController {
 			out.flush();
 		}
 
-
 //		}
-	}
-
-
-	@GetMapping("/getIp")
-	public String grtIp(HttpServletRequest request, HttpServletResponse response) {
-		String ip = request.getServerName();
-		int port = request.getServerPort();
-		logger.debug(ip);
-		logger.debug(""+port);
-		return ip + ":" + port;
-	}
-
-	@GetMapping("/getClientIp")
-	public String grtclientIp(HttpServletRequest request, HttpServletResponse response) {
-		String ip = request.getRemoteAddr();
-		logger.debug(request.getRemoteHost());
-		int port = request.getRemotePort();
-		logger.debug(ip + ":" + port);
-		return ip + ":" + port;
 	}
 
 

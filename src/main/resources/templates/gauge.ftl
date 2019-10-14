@@ -34,10 +34,10 @@
         },
         series: [
             {
-                name: '业务指标',
+                name: '压力监测',
                 type: 'gauge',
                 detail: {formatter: '{value} KPa'},
-                data: [{value: 0, name: '当前压力'}]
+                data: [{value: 0, name: '当前压强'}]
             }
         ]
     };
@@ -57,7 +57,8 @@
         }
     });*/
     // alert(ip);
-    var websocket = new WebSocket("ws://${ip }/gaugeWebsocket");
+    const ip = window.location.host;
+    var websocket = new WebSocket("ws://" + ip + "/gaugeWebsocket");
 
 
     //连接成功建立的回调方法

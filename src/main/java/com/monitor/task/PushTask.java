@@ -1,12 +1,15 @@
 package com.monitor.task;
 
 import com.alibaba.fastjson.JSON;
+import com.monitor.dao.PressureDao;
+import com.monitor.measurement.Pressure;
 import com.monitor.pojo.Point;
 import com.monitor.webSocketServer.DynamicLine;
 import com.monitor.webSocketServer.GaugeWebSocket;
 import com.monitor.webSocketServer.LineWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -35,22 +38,21 @@ public class PushTask {
 /*	@Autowired
 	TaskExecutor pushThreadPool;*/
 
+	@Autowired
+	PressureDao pressureDao;
+
 	/**
 	 * 仪表盘推送
 	 */
-	private double a = 12.1;
-	private boolean flag = true;
 
 	@Async(value = "pushThreadPool")
 	@Scheduled(cron = "0/2 * * * * ?")
 	public void gauge() {
 		for (GaugeWebSocket webSocket : gaugeWebSockets) {
-			String s = String.format("%.2f", a);
+			Pressure pre = pressureDao.getLast();
+			String s = String.format("%.2f", pre.getPressure());
 			webSocket.sendMessage(s);
-//			logger.info("线程{}推送仪表板数据{}",Thread.currentThread().getName(),webSocket);
 		}
-		a += flag ? 1.32 : -1.31;
-		flag = ! flag;
 	}//仪表盘结束
 
 

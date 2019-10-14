@@ -26,8 +26,9 @@ public class InfluxdbBuilder {
 		String url1 = "http://127.0.0.1:8086";
 		String url2 = "http://58.49.96.182:58086";
 		String url3 = "http://cloud.isyslab.info:58086";
+		String url4 = "http://stephenyi.cn:8086";
 
-		InfluxDB influxDB = InfluxDBFactory.connect(url3,"root","admin");
+		InfluxDB influxDB = InfluxDBFactory.connect(url4,"root","admin");
 		influxDB.setDatabase("ys");
 		return influxDB;
 	}

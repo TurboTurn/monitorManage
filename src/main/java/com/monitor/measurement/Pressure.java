@@ -25,12 +25,12 @@ public class Pressure {
 	private String equipNumber;//设备编号
 
 	@Column(name = "pressure")
-	private double pressure;//测量参数（压力）
+	private Double pressure;//测量参数（压力）
 
 	public Pressure() {
 	}
 
-	public Pressure(String partition, String equipNumber, double pressure) {
+	public Pressure(String partition, String equipNumber, Double pressure) {
 		this.partition = partition;
 		this.equipNumber = equipNumber;
 		this.pressure = pressure;
@@ -60,11 +60,11 @@ public class Pressure {
 		this.equipNumber = equipNumber;
 	}
 
-	public double getPressure() {
+	public Double getPressure() {
 		return pressure;
 	}
 
-	public void setPressure(double pressure) {
+	public void setPressure(Double pressure) {
 		this.pressure = pressure;
 	}
 

@@ -1,14 +1,17 @@
 package com.monitor.ActiveMQ;
+/*
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+*/
 /**
  * @author : ys
  * @date : 2019/4/15 16:21 星期一
- **/
+ **//*
+
 
 @Component
 public class Consumer {
@@ -19,4 +22,5 @@ public class Consumer {
 		logger.info("收到消息：{}",text);
 	}
 }
+*/
 
