@@ -66,7 +66,6 @@ public class InfluxdbBuilder {
 	@Test
 	public void insert() throws InterruptedException {
 
-
 		String tablename = "table1";
 		InfluxDB influxDB = InfluxdbBuilder.createInfluxDB();
 		double f = 2036;
@@ -76,7 +75,8 @@ public class InfluxdbBuilder {
 			long s = System.currentTimeMillis();
 			Point.Builder builder = Point.measurement(tablename);
 			builder.tag("tag",flag?"good":"bad");
-			builder.addField("field",f);builder.time(System.currentTimeMillis(), TimeUnit.SECONDS);
+			builder.addField("field",f);
+			builder.time(System.currentTimeMillis(), TimeUnit.SECONDS);
 			influxDB.write(builder.build());
 			long e = System.currentTimeMillis();
 //			System.out.println("共耗时"+(e-s)/1000f + "秒");

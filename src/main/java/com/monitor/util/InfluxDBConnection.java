@@ -147,6 +147,7 @@ public class InfluxDBConnection {
 	 */
 	public void batchInsert(BatchPoints batchPoints) {
 		influxDB.write(batchPoints);
+//		influxDB.enableBatch(BatchOptions.DEFAULTS.jitterDuration(500));
 		// influxDB.enableGzip();
 		// influxDB.enableBatch(2000,100,TimeUnit.MILLISECONDS);
 		// influxDB.disableGzip();
