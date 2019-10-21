@@ -54,17 +54,15 @@ public class DataWriteTask {//模拟数据采集，写入influxDB
 	private int batchCount = 0;
 	private boolean batchAdd = true;
 	private Random random = new Random();
-
+	private InfluxDB influxDB = InfluxDBManager.getInfluxDB();
 	@Async(value = "pushThreadPool")
 	@Scheduled(cron = "0/2 * * * * ?")
 	public void writePressureBatch() { //批量写入压力
-		InfluxDB influxDB = InfluxDBManager.getInfluxDB();
-//		influxDB.setDatabase(dbName);
 //		influxDB.enableBatch(BatchOptions.DEFAULTS);//开启批处理
 		String measurement = "pressure";
 		BatchPoints batchPoints = BatchPoints
 				.database(dbName)
-				.tag("async", "true")
+//				.tag("async", "true")
 				.consistency(InfluxDB.ConsistencyLevel.ALL)
 				.build();
 
@@ -128,13 +126,75 @@ public class DataWriteTask {//模拟数据采集，写入influxDB
 		}
 	}
 
+	private double height = 12;//液位计高度 30米上限
+	private int heightCount = 0;
+	private boolean heightAdd = true;
+	@Async(value = "pushThreadPool")
+	@Scheduled(cron = "0/2 * * * * ?")
 	public void writeLDHeight() { //雷达液位计液位高度  伺服液位计液位高度
+		String measurement = "height";
+		BatchPoints batchPoints = BatchPoints
+				.database(dbName)
+				.consistency(InfluxDB.ConsistencyLevel.ALL)
+				.build();
+		long currentTime = System.currentTimeMillis();
+		Point point1 = Point
+				.measurement(measurement)
+				.time(currentTime, TimeUnit.MILLISECONDS)
+				.tag("partition", "CG1")
+				.tag("equipNumber", "LD-01")
+				.addField("height",height + random.nextInt(3) * 0.001)
+				.build();
+		Point point2 = Point
+				.measurement(measurement)
+				.time(currentTime, TimeUnit.MILLISECONDS)
+				.tag("partition", "CG2")
+				.tag("equipNumber", "LD-02")
+				.addField("height",height + random.nextInt(3) * 0.001)
+				.build();
+		Point point3 = Point
+				.measurement(measurement)
+				.time(currentTime, TimeUnit.MILLISECONDS)
+				.tag("partition", "CG3")
+				.tag("equipNumber", "LD-03")
+				.addField("height",height + random.nextInt(3) * 0.001)
+				.build();
+		Point point4 = Point
+				.measurement(measurement)
+				.time(currentTime, TimeUnit.MILLISECONDS)
+				.tag("partition", "CG4")
+				.tag("equipNumber", "LD-04")
+				.addField("height",height + random.nextInt(3) * 0.001)
+				.build();
+		Point point5 = Point
+				.measurement(measurement)
+				.time(currentTime, TimeUnit.MILLISECONDS)
+				.tag("partition", "CG5")
+				.tag("equipNumber", "LD-05")
+				.addField("height",height + random.nextInt(3) * 0.001)
+				.build();
+		Point point6 = Point
+				.measurement(measurement)
+				.time(currentTime, TimeUnit.MILLISECONDS)
+				.tag("partition", "CG6")
+				.tag("equipNumber", "LD-06")
+				.addField("height",height + random.nextInt(3) * 0.001)
+				.build();
 
+		batchPoints.point(point1);
+		batchPoints.point(point2);
+		batchPoints.point(point3);
+		batchPoints.point(point4);
+		batchPoints.point(point5);
+		batchPoints.point(point6);
+		influxDB.write(batchPoints);
+
+		height += heightAdd ? 0.001 : -0.001;
+		heightCount ++;
+		if(heightCount == 5){
+			heightCount = random.nextInt(5);
+			heightAdd = !heightAdd;
+		}
 	}
 
-	public static void main(String[] args) {
-		Random random = new Random();
-		for (int i = 0; i < 30; i++)
-			System.out.print(random.nextInt(5) + " ");
-	}
 }

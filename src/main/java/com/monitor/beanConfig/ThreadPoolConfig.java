@@ -22,8 +22,8 @@ public class ThreadPoolConfig {
 	@Bean
 	public TaskExecutor pushThreadPool() {// 推送webSocket数据线程池
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(5);// 设置核心线程数
-		executor.setMaxPoolSize(20);// 设置最大线程数
+		executor.setCorePoolSize(10);// 设置核心线程数
+		executor.setMaxPoolSize(50);// 设置最大线程数
 		executor.setQueueCapacity(20);// 设置队列容量
 		executor.setKeepAliveSeconds(60);// 设置最大线程池线程活跃时间（秒）
 		executor.setThreadNamePrefix("push-");

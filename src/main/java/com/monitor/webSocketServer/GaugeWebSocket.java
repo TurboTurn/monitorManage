@@ -38,7 +38,7 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 		this.session = session;
 		gaugeWebSockets.add(this);     //加入set中
 		logger.info("有新连接加入，当前连接数{}", gaugeWebSockets.size());
-		sendMessage(String.format("%.2f", pressureDao.getLast().getPressure()));//todo 第一次查数据并返回
+		sendMessage(String.format("%.3f", pressureDao.getLast().getPressure()));//todo 第一次查数据并返回
 	}
 
 	/**

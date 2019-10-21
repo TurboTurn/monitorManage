@@ -24,7 +24,7 @@
     option = null;
     option = {
         tooltip: {
-            formatter: "{a} <br/>{b} : {c}%"
+            formatter: "{a} <br/>{b} : {c}mPa"
         },
         toolbox: {
             feature: {
@@ -36,7 +36,9 @@
             {
                 name: '压力监测',
                 type: 'gauge',
-                detail: {formatter: '{value} KPa'},
+                min:0,
+                max:1,
+                detail: {formatter: '{value} mPa'},
                 data: [{value: 0, name: '当前压强'}]
             }
         ]

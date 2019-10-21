@@ -50,7 +50,7 @@ public class PushTask {
 	public void gauge() {
 		for (GaugeWebSocket webSocket : gaugeWebSockets) {
 			Pressure pre = pressureDao.getLast();
-			String s = String.format("%.2f", pre.getPressure());
+			String s = String.format("%.3f", pre.getPressure());
 			webSocket.sendMessage(s);
 		}
 	}//仪表盘结束
