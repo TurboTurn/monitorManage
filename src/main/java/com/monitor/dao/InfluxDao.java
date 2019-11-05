@@ -26,7 +26,7 @@ public class InfluxDao<T> {
 	String measurement;
 
 	Class<T> clazz;
-
+	@SuppressWarnings("unchecked")
 	public InfluxDao() {
 		// this表示的子类，c表示就是CustomerDaoImpl的Class对象
 		Class c = this.getClass();

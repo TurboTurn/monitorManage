@@ -18,7 +18,7 @@ Welcome<br/><input id="text" type="text"/>
     var websocket = null;
 
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://127.0.0.1:8080/websocket");
+        websocket = new WebSocket("ws://"+window.location.host+"/websocket");
     } else {
         alert('当前浏览器 Not support websocket')
     }

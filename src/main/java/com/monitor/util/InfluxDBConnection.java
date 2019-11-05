@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * InfluxDB数据库连接操作类
  *
  */
+@SuppressWarnings("deprecation")
 public class InfluxDBConnection {
 
 	public static void main(String[] args) {

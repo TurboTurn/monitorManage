@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.Random;
@@ -22,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @date : 2019/10/14 14:35 星期一
  **/
 
-@Component
+//@Component//注解掉任务不会启动
 public class DataWriteTask {//模拟数据采集，写入influxDB
 	Logger logger = LoggerFactory.getLogger(DataWriteTask.class);
 
@@ -59,6 +58,7 @@ public class DataWriteTask {//模拟数据采集，写入influxDB
 	@Scheduled(cron = "0/2 * * * * ?")
 	public void writePressureBatch() { //批量写入压力
 //		influxDB.enableBatch(BatchOptions.DEFAULTS);//开启批处理
+		logger.debug("注解component");
 		String measurement = "pressure";
 		BatchPoints batchPoints = BatchPoints
 				.database(dbName)

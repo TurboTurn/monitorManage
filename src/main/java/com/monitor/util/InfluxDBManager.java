@@ -10,7 +10,9 @@ import org.influxdb.impl.InfluxDBMapper;
  **/
 public class InfluxDBManager {
 	private InfluxDBManager(){}
-
+	private static String url = "http://stephenyi.cn:8086";
+	private static String username = "root";
+	private static String password = "admin";
 	/**
 	 * 这种方式跟饿汉式方式采用的机制类似，但又有不同。
 	 * 两者都是采用了类装载的机制来保证初始化实例时只有一个线程。
@@ -22,10 +24,7 @@ public class InfluxDBManager {
 	 * 优点：避免了线程不安全，延迟加载，效率高。
 	 */
 	private static class InfluxInstance{//单例influxDB
-		private static String url3 = "http://cloud.isyslab.info:58086";
-		private static String url = "http://stephenyi.cn:8086";
-		private static final InfluxDB influxDB =
-				InfluxDBFactory.connect(url, "root", "admin");
+		private static final InfluxDB influxDB = InfluxDBFactory.connect(url, username, password);
 	}
 
 	private static class MapperInstance{//单例mapper

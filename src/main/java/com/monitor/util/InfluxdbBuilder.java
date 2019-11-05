@@ -84,12 +84,6 @@ public class InfluxdbBuilder {
 			f+=2;flag=!flag;
 			TimeUnit.SECONDS.sleep(2);
 		}
-
-
 	}
-	@Test
-	public void delayinsert(){
-		System.out.println(username);
-		System.out.println(10*Math.random());
-	}
+
 }
