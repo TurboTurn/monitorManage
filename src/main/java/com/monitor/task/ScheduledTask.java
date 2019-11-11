@@ -6,7 +6,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -27,9 +26,4 @@ public class ScheduledTask {
 		logger.info("{},当前时间{}",Thread.currentThread().getName(),dateFormat.format(new Date()));
 	}
 
-	@Async(value = "pushThreadPool")
-//	@Scheduled(cron = "0/5 * * * * ?")
-	public void printTime() {
-		logger.info("{} {}",Thread.currentThread().getName(),LocalDateTime.now().toString());
-	}
 }

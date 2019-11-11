@@ -2,8 +2,21 @@
 #当三个文件中有配置信息冲突时,优先级是:properties>yaml>yml,也就是properties里配置的内容会覆盖另外两个的配置
 
 server:
+  port: 8080
   tomcat:
     min-spare-threads: 10 #最小线程数 default 10
     max-threads: 200 #最大线程数 default 200
     accept-count: 100 #最小线程用完了的等待队列大小 default 100
     max-connections: 10000 #最大并发数 default 10000
+
+    accesslog:
+      buffered: true
+#      directory: C:/logs
+      directory: /root/logs
+      enabled: true
+      file-date-format: .yyyy-MM-dd
+      pattern: common
+      prefix: access_log
+      rename-on-rotate: false
+      request-attributes-enabled: false
+      rotate: true

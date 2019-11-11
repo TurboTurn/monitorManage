@@ -1,7 +1,6 @@
 package com.monitor.task;
 
 import com.monitor.dao.PressureDao;
-import com.monitor.measurement.Pressure;
 import com.monitor.util.InfluxDBManager;
 import org.influxdb.InfluxDB;
 import org.influxdb.dto.BatchPoints;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.time.Instant;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +31,7 @@ public class DataWriteTask {//模拟数据采集，写入influxDB
 	private int count = 0;
 	private boolean add = true;
 
-	@Async(value = "pushThreadPool")
+/*	@Async(value = "pushThreadPool")
 //	@Scheduled(cron = "0/2 * * * * ?")
 	public void writePressure() { //压力变送器数据
 		Pressure pressure = new Pressure("CG1", "YB-01", pres);
@@ -46,7 +44,7 @@ public class DataWriteTask {//模拟数据采集，写入influxDB
 			count = random.nextInt(5);
 			add = !add;
 		}
-	}
+	}*/
 
 
 	private double pressure = 0.2;
@@ -58,7 +56,7 @@ public class DataWriteTask {//模拟数据采集，写入influxDB
 	@Scheduled(cron = "0/2 * * * * ?")
 	public void writePressureBatch() { //批量写入压力
 //		influxDB.enableBatch(BatchOptions.DEFAULTS);//开启批处理
-		logger.debug("注解component");
+		logger.info("注解component");
 		String measurement = "pressure";
 		BatchPoints batchPoints = BatchPoints
 				.database(dbName)

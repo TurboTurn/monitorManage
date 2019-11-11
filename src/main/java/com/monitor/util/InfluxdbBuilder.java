@@ -27,9 +27,9 @@ public class InfluxdbBuilder {
 		String url2 = "http://58.49.96.182:58086";
 		String url3 = "http://cloud.isyslab.info:58086";
 		String url4 = "http://stephenyi.cn:8086";
-
+		String dbName = "monitorMS";
 		InfluxDB influxDB = InfluxDBFactory.connect(url4,"root","admin");
-		influxDB.setDatabase("ys");
+		influxDB.setDatabase(dbName);
 		return influxDB;
 	}
 	@Test
@@ -43,7 +43,7 @@ public class InfluxdbBuilder {
 		float i=2000;
 		String sql = "insert mytable,host=localhost mytime="+i;
 		String sql2 = "insert table1,tag=good field="+i;//不支持
-		String sql1 = "select * from table1";
+		String sql1 = "select * from factory1";
 		Query query = new Query(sql1);
 		QueryResult result = influxDB.query(query);
 		QueryResult.Series series = result.getResults().get(0).getSeries().get(0);
