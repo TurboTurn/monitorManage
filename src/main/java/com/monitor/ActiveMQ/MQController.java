@@ -1,14 +1,13 @@
 package com.monitor.ActiveMQ;
 
+import com.monitor.pojo.Tank;
 import com.monitor.pojo.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.jms.Destination;
@@ -21,9 +20,9 @@ import javax.jms.Destination;
 
 
 @RestController
-@RequestMapping("/queue")
-public class QueueController {
-	private Logger logger = LoggerFactory.getLogger(QueueController.class);
+@RequestMapping("/mq")
+public class MQController {
+	private Logger logger = LoggerFactory.getLogger(MQController.class);
 
 	//注入发送消息的对象
 	@Autowired
@@ -47,7 +46,7 @@ public class QueueController {
 	@Autowired
 	private TaskExecutor pushThreadPool;
 	@RequestMapping("/testmq")
-	public String t1(){
+	public String t1(){//测试吞吐量
 		pushThreadPool.execute(()->{
 			long s = System.currentTimeMillis();
 			for (int i=0;i<10000;i++){
@@ -57,5 +56,18 @@ public class QueueController {
 		});
 		return "success";
 	}
+
+
+	/**
+	 * 生产数据到MQ，再由消费者将数据存入DB
+	 * @param list
+	 * @return
+	 */
+	@RequestMapping(path = "/produce" ,method = RequestMethod.POST)
+	public String producer(@RequestBody Tank[] list){
+		jmsTemplate.convertAndSend(destination,list);
+		return "produce success";
+	}
+
 }
 

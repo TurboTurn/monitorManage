@@ -12,7 +12,7 @@ import java.util.Date;
  * @author : ys
  * @date : 2019/4/26 9:12 星期五
  **/
-@Component
+//@Component
 public class ScheduledTask {
 	private Logger logger = LoggerFactory.getLogger(ScheduledTask.class);
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");

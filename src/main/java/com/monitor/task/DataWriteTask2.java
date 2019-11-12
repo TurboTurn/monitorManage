@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 //@Component
-public class DataWriteTask2 {//使用此类来写入数据
+public class DataWriteTask2 {//使用此类来写入数据，废弃，使用http方式
 	Logger logger = LoggerFactory.getLogger(DataWriteTask2.class);
 
 	private String dbName = "monitorMS";

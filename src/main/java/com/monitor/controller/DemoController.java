@@ -24,7 +24,7 @@ public class DemoController {
 
 	double data = 10.50f;
 
-	@GetMapping("demo")
+	@RequestMapping("demo")
 	public String fun(String name) {//echart.html
 		logger.info("传入参数为{}", name);
 		int[] a = {10, 12, 14, 13, 15, 12, 14};
