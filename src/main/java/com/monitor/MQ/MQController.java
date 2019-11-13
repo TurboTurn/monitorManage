@@ -1,4 +1,4 @@
-package com.monitor.ActiveMQ;
+package com.monitor.MQ;
 
 import com.monitor.pojo.Tank;
 import com.monitor.pojo.User;
@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -67,6 +68,16 @@ public class MQController {
 	public String producer(@RequestBody Tank[] list){
 		jmsTemplate.convertAndSend(destination,list);
 		return "produce success";
+	}
+
+	@Autowired
+	private KafkaTemplate<String,Object> kafkaTemplate;
+
+	@PostMapping(path = "/kafka/send")
+	public String sendKafka(@RequestBody String jsonString){
+//		System.out.println(list);
+		kafkaTemplate.send("testTopic",jsonString);
+		return "true";
 	}
 
 }

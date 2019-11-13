@@ -79,7 +79,8 @@ public class HttpWriter {//数据采集程序，部署到库区，将数据上�
 		list.add(t5);
 		list.add(t6);
 		//http发送list
-		String url = "http://127.0.0.1:8080/mq/produce";
+//		String url = "http://127.0.0.1:8080/mq/produce";
+		String url = "http://127.0.0.1:8080/mq/kafka/send";
 		String jsonString = JSON.toJSONString(list);
 		postData(url, jsonString);//上传数据
 

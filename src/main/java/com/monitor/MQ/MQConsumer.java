@@ -1,6 +1,7 @@
-package com.monitor.ActiveMQ;
+package com.monitor.MQ;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.monitor.pojo.Tank;
 import com.monitor.util.InfluxDBManager;
 import org.influxdb.InfluxDB;
@@ -10,10 +11,12 @@ import org.influxdb.dto.Point;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -72,4 +75,14 @@ public class MQConsumer {
 //	public void readMessage1(ObjectMessage message) throws JMSException {//自定义报警信息
 //		logger.info("消费者二：收到消息：{}",(User)message.getObject());
 //	}
+
+
+	@KafkaListener(topics = "testTopic")
+	public void onMessage(String message){
+		//insertIntoDb(buffer);//这里为插入数据库代码
+		List<Tank> list = JSONObject.parseArray(message,Tank.class);//将json转化为Tank数组，插入db
+		logger.info(message);
+		for (Tank tank:list)
+			System.out.println(tank);
+	}
 }
