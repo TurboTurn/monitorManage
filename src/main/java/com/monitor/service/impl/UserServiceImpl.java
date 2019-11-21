@@ -1,8 +1,8 @@
-package com.monitor.service.alarm.serviceImpl;
+package com.monitor.service.impl;
 
 import com.monitor.dao.alarm.UserInfoDao;
 import com.monitor.pojo.UserInfo;
-import com.monitor.service.alarm.UserService;
+import com.monitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserInfo> selectAll() {
-        List<UserInfo> userInfos = userInfoDao.selectAll();
-        return userInfos;
+        return userInfoDao.selectAll();
     }
 
 }

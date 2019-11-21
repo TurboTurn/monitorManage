@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.HashMap;
@@ -45,8 +46,8 @@ public class PushTask {
 	 * 仪表盘推送
 	 */
 
-//	@Async(value = "pushThreadPool")
-//	@Scheduled(cron = "0/2 * * * * ?")
+	@Async(value = "pushThreadPool")
+	@Scheduled(cron = "0/2 * * * * ?")
 	public void gauge() {
 		for (GaugeWebSocket webSocket : gaugeWebSockets) {
 			Pressure pre = pressureDao.getLast();
@@ -69,24 +70,25 @@ public class PushTask {
 		}
 	}
 
-//	@Async(value = "pushThreadPool")
-//	@Scheduled(cron = "0/2 * * * * ?")
+	@Async(value = "pushThreadPool")
+	@Scheduled(cron = "0/2 * * * * ?")
 	public void line() {
 		for (LineWebSocket lineWebSocket : lineWebSocketSet) {
 			lineWebSocket.sendMessage(deque.toString());//推送数据
 //			logger.info("线程{}推送曲线数据{}",Thread.currentThread().getName(),lineWebSocket);
 		}
+		//更新数据
 		deque.removeFirst();
-		deque.addLast(300 + random.nextInt(100));//更新数据
+		deque.addLast(300 + random.nextInt(100));
 	}//曲线图结束
 
-//	@Async(value = "pushThreadPool")
-//	@Scheduled(cron = "0/2 * * * * ?")
+	@Async(value = "pushThreadPool")
+	@Scheduled(cron = "0/2 * * * * ?")
 	public void dynamicLine() {
 		for (DynamicLine dynamicLine : dynamicLines){
 			HashMap<String,Object> map = new HashMap<>();
 			map.put("status","message");
-			Point point = new Point(new Date().getTime(),Math.random());
+			Point point = new Point(System.currentTimeMillis(),Math.random());
 			map.put("data",point);
 			dynamicLine.sendMessage(JSON.toJSONString(map));
 		}

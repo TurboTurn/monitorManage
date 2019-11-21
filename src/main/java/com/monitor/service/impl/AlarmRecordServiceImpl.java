@@ -1,8 +1,8 @@
-package com.monitor.service.alarm.serviceImpl;
+package com.monitor.service.impl;
 
 import com.monitor.dao.alarm.AlarmRecordDao;
 import com.monitor.pojo.AlarmRecord;
-import com.monitor.service.alarm.AlarmRecordService;
+import com.monitor.service.AlarmRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +22,7 @@ public class AlarmRecordServiceImpl implements AlarmRecordService {
      * @return
      */
     @Override
-    public Integer InsertAlarmRecord(AlarmRecord alarmRecord) {
-        int row = alarmRecordDao.insertAlarmRecord(alarmRecord);
-        System.out.println("保存的alarmRecord记录的Id: "+alarmRecord.getId());
-        return alarmRecord.getId();
+    public Integer insertAlarmRecord(AlarmRecord alarmRecord) {
+        return alarmRecordDao.insertAlarmRecord(alarmRecord);
     }
 }

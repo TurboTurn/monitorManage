@@ -1,4 +1,4 @@
-package com.monitor.service.alarm;
+package com.monitor.service;
 
 import com.monitor.pojo.Alarm;
 
@@ -34,7 +34,7 @@ public interface AlarmService {
      * @param id
      * @return
      */
-    void del(Integer id);
+    void delete(Integer id);
 
     /**
      * 跟新报警规则

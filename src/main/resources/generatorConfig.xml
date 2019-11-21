@@ -1,67 +1,51 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">-->
-<!--<generatorConfiguration>-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
 
-    <!--<classPathEntry-->
-            <!--location="F:\Tools\Maven\repository\mysql\mysql-connector-java\8.0.17\mysql-connector-java-8.0.17.jar"/>-->
+    <classPathEntry
+            location="F:\Tools\Maven\repository\mysql\mysql-connector-java\8.0.17\mysql-connector-java-8.0.17.jar"/>
 
-    <!--<context id="common-model" targetRuntime="MyBatis3">-->
+    <context id="common-model" targetRuntime="MyBatis3">
 
-        <!--&lt;!&ndash; 生成的pojo，将implements Serializable&ndash;&gt;-->
-        <!--&lt;!&ndash;<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>&ndash;&gt;-->
+        <!-- 生成的pojo，将implements Serializable-->
+        <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>-->
 
-        <!--<commentGenerator>-->
-            <!--<property name="suppressDate" value="true"/>-->
-            <!--<property name="suppressAllComments" value="true"/>-->
-        <!--</commentGenerator>-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
 
-        <!--<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/middle?serverTimezone=UTC"-->
-                        <!--driverClass="com.mysql.cj.jdbc.Driver" password="root" userId="root" />-->
+        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/middle?serverTimezone=UTC"
+                        driverClass="com.mysql.cj.jdbc.Driver" password="root" userId="root" />
 
 
 
-        <!--&lt;!&ndash;     默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer-->
-              <!--true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal &ndash;&gt;-->
-        <!--<javaTypeResolver>-->
-            <!--<property name="forceBigDecimals" value="false" />-->
-        <!--</javaTypeResolver>-->
+        <!--     默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+              true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
 
-        <!--&lt;!&ndash;生成实体类F:\IDEA\workspace\abms\monitorManage\src\main\java\com\monitor\pojo\Alarm.java&ndash;&gt;-->
-        <!--<javaModelGenerator targetPackage="com.monitor.pojo"-->
-                            <!--targetProject="src/main/java" >-->
-            <!--<property name="enableSubPackages" value="true"/>-->
-            <!--<property name="trimStrings" value="true"/>-->
-        <!--</javaModelGenerator>-->
+        <!--生成实体类F:\IDEA\workspace\abms\monitorManage\src\main\java\com\monitor\pojo\Alarm.java-->
+        <javaModelGenerator targetPackage="com.monitor.pojo"
+                            targetProject="src/main/java" >
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
 
-        <!--&lt;!&ndash;生成sqlMapper文件&ndash;&gt;-->
-        <!--<sqlMapGenerator targetPackage="com.monitor.mapper"-->
-                         <!--targetProject="src/main/java" >-->
-            <!--<property name="enableSubPackages" value="true"/>-->
-        <!--</sqlMapGenerator>-->
+        <!--生成sqlMapper文件-->
+        <sqlMapGenerator targetPackage="com.monitor.mapper"
+                         targetProject="src/main/java" >
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
 
-        <!--&lt;!&ndash;生成dao文件  可以配置 type="XMLMAPPER"生成xml的dao实现&ndash;&gt;-->
-        <!--<javaClientGenerator targetPackage="com.monitor.dao.alarm"-->
-                             <!--targetProject="src/main/java" type="XMLMAPPER" >-->
-            <!--<property name="enableSubPackages" value="true"/>-->
-        <!--</javaClientGenerator>-->
+        <!--生成dao文件  可以配置 type="XMLMAPPER"生成xml的dao实现-->
+        <javaClientGenerator targetPackage="com.monitor.dao.alarm"
+                             targetProject="src/main/java" type="XMLMAPPER" >
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
 
-        <!--&lt;!&ndash;<table tableName="userinfo" domainObjectName="UserInfo"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableCountByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableUpdateByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableDeleteByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableSelectByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
-        <!--&lt;!&ndash;&gt;</table>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<table tableName="alarm" domainObjectName="Alarm"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableCountByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableUpdateByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableDeleteByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;enableSelectByExample="false"&ndash;&gt;-->
-               <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
-        <!--&lt;!&ndash;&gt;</table>&ndash;&gt;-->
-
-        <!--<table tableName="alarmrecord" domainObjectName="AlarmRecord"-->
+        <!--<table tableName="userinfo" domainObjectName="UserInfo"-->
                <!--enableCountByExample="false"-->
                <!--enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false"-->
@@ -69,6 +53,22 @@
                <!--selectByExampleQueryId="false"-->
         <!--&gt;</table>-->
 
-    <!--</context>-->
-<!--</generatorConfiguration>-->
+        <!--<table tableName="alarm" domainObjectName="Alarm"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"-->
+        <!--&gt;</table>-->
+
+        <table tableName="alarmrecord" domainObjectName="AlarmRecord"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+        ></table>
+
+    </context>
+</generatorConfiguration>
 

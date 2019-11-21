@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @author : ys
  * @date : 2019/4/15 15:49 星期一
  **/
-@Component
-@PropertySource("classpath:influxDB.properties")
+//@Component
+//@PropertySource("classpath:influxDB.properties")
 public class InfluxdbBuilder{
 
 	@Value("${influx.username}")

@@ -26,9 +26,9 @@ spring:
 #  profiles:
 #    active: dev
   datasource:
-    url: jdbc:mysql://10.12.136.240:3306/middle?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://47.100.213.205:3306/monitor?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
     username: root
-    password: root
+    password: Mydb6.
     type: com.alibaba.druid.pool.DruidDataSource
 
 mybatis:

@@ -1,4 +1,4 @@
-package com.monitor.service.alarm;
+package com.monitor.service;
 
 import com.monitor.pojo.AlarmRecord;
 
@@ -8,5 +8,7 @@ import com.monitor.pojo.AlarmRecord;
  * @date 2019/11/20
  */
 public interface AlarmRecordService {
-    Integer InsertAlarmRecord(AlarmRecord alarmRecord);
+
+    Integer insertAlarmRecord(AlarmRecord alarmRecord);
+
 }

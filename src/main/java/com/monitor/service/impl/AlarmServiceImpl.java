@@ -1,8 +1,8 @@
-package com.monitor.service.alarm.serviceImpl;
+package com.monitor.service.impl;
 
 import com.monitor.dao.alarm.AlarmDao;
 import com.monitor.pojo.Alarm;
-import com.monitor.service.alarm.AlarmService;
+import com.monitor.service.AlarmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +30,12 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     public Integer insertAlarm(Alarm alarm) {
-       int row=alarmDao.insertAlarm(alarm);
-       System.out.println("添加的报警记录的Id为: " + alarm.getId());
-       return alarm.getId();
+       return alarmDao.insertAlarm(alarm);
     }
 
     @Override
-    public void del(Integer id) {
-        alarmDao.del(id);
+    public void delete(Integer id) {
+        alarmDao.delete(id);
     }
 
     @Override

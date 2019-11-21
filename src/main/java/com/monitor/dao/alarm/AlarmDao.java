@@ -13,9 +13,14 @@ import java.util.List;
 @Mapper
 @Repository
 public interface AlarmDao {
+
     List<Alarm> selectAll();
+
     Alarm selectById(Integer id);
+
     Integer insertAlarm(Alarm alarm);
-    void del(Integer id);
+
+    void delete(Integer id);
+
     void update(Alarm alarm);
 }

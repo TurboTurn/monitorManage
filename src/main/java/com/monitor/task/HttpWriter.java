@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-@Component
+//@Component
 public class HttpWriter {//数据采集程序，部署到库区，将数据上传
 	private Logger logger = LoggerFactory.getLogger(HttpWriter.class);
 
