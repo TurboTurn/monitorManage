@@ -73,6 +73,9 @@ public class MQController {
 	@Autowired
 	private KafkaTemplate<String,Object> kafkaTemplate;
 
+	//模拟前端通过Post请求传输数据，存储到kafka队列的其中一个主题topic，数据提供方直接通过页面填入数据即可
+	//RequestBody接收传过来的数据
+	//postman那边直接是put body（raw -> json）
 	@PostMapping(path = "/kafka/send")
 	public String sendKafka(@RequestBody String jsonString){
 //		System.out.println(list);

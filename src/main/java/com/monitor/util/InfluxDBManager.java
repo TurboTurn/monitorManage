@@ -39,5 +39,4 @@ public class InfluxDBManager {
 		return MapperInstance.mapper;
 	}
 
-
 }

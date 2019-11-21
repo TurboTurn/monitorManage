@@ -33,8 +33,8 @@ public class DataWriteTask2 {//使用此类来写入数据，废弃，使用http
 	private Random random = new Random();
 	private InfluxDB influxDB = InfluxDBManager.getInfluxDB();
 
-	@Async(value = "pushThreadPool")
-	@Scheduled(cron = "0/5 * * * * ?")
+//	@Async(value = "pushThreadPool")
+//	@Scheduled(cron = "0/5 * * * * ?")
 	public void write1(){
 		String measurement = "factory1";
 		BatchPoints batchPoints = BatchPoints

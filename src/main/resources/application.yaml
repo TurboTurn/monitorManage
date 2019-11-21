@@ -1,4 +1,3 @@
-
 #当三个文件中有配置信息冲突时,优先级是:properties>yaml>yml,也就是properties里配置的内容会覆盖另外两个的配置
 
 server:
@@ -20,3 +19,22 @@ server:
       rename-on-rotate: false
       request-attributes-enabled: false
       rotate: true
+
+
+     # mysql configuration
+spring:
+#  profiles:
+#    active: dev
+  datasource:
+    url: jdbc:mysql://10.12.136.240:3306/middle?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath*:com/monitor/mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.monitor.pojo

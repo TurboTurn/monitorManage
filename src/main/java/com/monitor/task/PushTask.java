@@ -45,8 +45,8 @@ public class PushTask {
 	 * 仪表盘推送
 	 */
 
-	@Async(value = "pushThreadPool")
-	@Scheduled(cron = "0/2 * * * * ?")
+//	@Async(value = "pushThreadPool")
+//	@Scheduled(cron = "0/2 * * * * ?")
 	public void gauge() {
 		for (GaugeWebSocket webSocket : gaugeWebSockets) {
 			Pressure pre = pressureDao.getLast();
@@ -69,8 +69,8 @@ public class PushTask {
 		}
 	}
 
-	@Async(value = "pushThreadPool")
-	@Scheduled(cron = "0/2 * * * * ?")
+//	@Async(value = "pushThreadPool")
+//	@Scheduled(cron = "0/2 * * * * ?")
 	public void line() {
 		for (LineWebSocket lineWebSocket : lineWebSocketSet) {
 			lineWebSocket.sendMessage(deque.toString());//推送数据
@@ -80,8 +80,8 @@ public class PushTask {
 		deque.addLast(300 + random.nextInt(100));//更新数据
 	}//曲线图结束
 
-	@Async(value = "pushThreadPool")
-	@Scheduled(cron = "0/2 * * * * ?")
+//	@Async(value = "pushThreadPool")
+//	@Scheduled(cron = "0/2 * * * * ?")
 	public void dynamicLine() {
 		for (DynamicLine dynamicLine : dynamicLines){
 			HashMap<String,Object> map = new HashMap<>();

@@ -41,6 +41,7 @@ public class GaugeWebSocket {// 仪表盘数据推送，该类实例为多例，
 		sendMessage(String.format("%.3f", pressureDao.getLast().getPressure()));//todo 第一次查数据并返回
 	}
 
+
 	/**
 	 * 连接关闭调用的方法
 	 */

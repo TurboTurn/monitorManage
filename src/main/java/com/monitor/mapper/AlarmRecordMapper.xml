@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.alarm.AlarmRecordDao" >
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.AlarmRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tank" property="tank" jdbcType="VARCHAR" />
+    <result column="oil" property="oil" jdbcType="VARCHAR" />
+    <result column="height_ld" property="heightLd" jdbcType="DOUBLE" />
+    <result column="pressure" property="pressure" jdbcType="DOUBLE" />
+    <result column="temperature" property="temperature" jdbcType="DOUBLE" />
+    <result column="happend_time" property="happendTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_id" property="alarmId" jdbcType="INTEGER" />
+    <result column="height_sf1" property="heightSf1" jdbcType="DOUBLE" />
+    <result column="height_sf2" property="heightSf2" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, tank, oil, height_ld, pressure, temperature, happend_time, alarm_id, height_sf1, 
+    height_sf2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from alarmrecord
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from alarmrecord
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertAlarmRecord" parameterType="com.monitor.pojo.AlarmRecord" useGeneratedKeys="true"
+          keyProperty="id" keyColumn="id">
+    insert into alarmrecord (tank, oil,
+      height_ld, pressure, temperature, 
+      happend_time, alarm_id, height_sf1, 
+      height_sf2)
+    values (#{tank}, #{oil},
+      #{heightLd}, #{pressure}, #{temperature},
+      #{happendTime}, #{alarmId}, #{heightSf1},
+      #{heightSf2})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.monitor.pojo.AlarmRecord" >
+    insert into alarmrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tank != null" >
+        tank,
+      </if>
+      <if test="oil != null" >
+        oil,
+      </if>
+      <if test="heightLd != null" >
+        height_ld,
+      </if>
+      <if test="pressure != null" >
+        pressure,
+      </if>
+      <if test="temperature != null" >
+        temperature,
+      </if>
+      <if test="happendTime != null" >
+        happend_time,
+      </if>
+      <if test="alarmId != null" >
+        alarm_id,
+      </if>
+      <if test="heightSf1 != null" >
+        height_sf1,
+      </if>
+      <if test="heightSf2 != null" >
+        height_sf2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tank != null" >
+        #{tank,jdbcType=VARCHAR},
+      </if>
+      <if test="oil != null" >
+        #{oil,jdbcType=VARCHAR},
+      </if>
+      <if test="heightLd != null" >
+        #{heightLd,jdbcType=DOUBLE},
+      </if>
+      <if test="pressure != null" >
+        #{pressure,jdbcType=DOUBLE},
+      </if>
+      <if test="temperature != null" >
+        #{temperature,jdbcType=DOUBLE},
+      </if>
+      <if test="happendTime != null" >
+        #{happendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmId != null" >
+        #{alarmId,jdbcType=INTEGER},
+      </if>
+      <if test="heightSf1 != null" >
+        #{heightSf1,jdbcType=DOUBLE},
+      </if>
+      <if test="heightSf2 != null" >
+        #{heightSf2,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monitor.pojo.AlarmRecord" >
+    update alarmrecord
+    <set >
+      <if test="tank != null" >
+        tank = #{tank,jdbcType=VARCHAR},
+      </if>
+      <if test="oil != null" >
+        oil = #{oil,jdbcType=VARCHAR},
+      </if>
+      <if test="heightLd != null" >
+        height_ld = #{heightLd,jdbcType=DOUBLE},
+      </if>
+      <if test="pressure != null" >
+        pressure = #{pressure,jdbcType=DOUBLE},
+      </if>
+      <if test="temperature != null" >
+        temperature = #{temperature,jdbcType=DOUBLE},
+      </if>
+      <if test="happendTime != null" >
+        happend_time = #{happendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmId != null" >
+        alarm_id = #{alarmId,jdbcType=INTEGER},
+      </if>
+      <if test="heightSf1 != null" >
+        height_sf1 = #{heightSf1,jdbcType=DOUBLE},
+      </if>
+      <if test="heightSf2 != null" >
+        height_sf2 = #{heightSf2,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monitor.pojo.AlarmRecord" >
+    update alarmrecord
+    set tank = #{tank,jdbcType=VARCHAR},
+      oil = #{oil,jdbcType=VARCHAR},
+      height_ld = #{heightLd,jdbcType=DOUBLE},
+      pressure = #{pressure,jdbcType=DOUBLE},
+      temperature = #{temperature,jdbcType=DOUBLE},
+      happend_time = #{happendTime,jdbcType=TIMESTAMP},
+      alarm_id = #{alarmId,jdbcType=INTEGER},
+      height_sf1 = #{heightSf1,jdbcType=DOUBLE},
+      height_sf2 = #{heightSf2,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

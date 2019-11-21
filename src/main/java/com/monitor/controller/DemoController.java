@@ -1,7 +1,10 @@
 package com.monitor.controller;
 
+import com.monitor.dao.TableDao;
+import com.monitor.measurement.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : ys
@@ -20,6 +24,9 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/demo")
 public class DemoController {
+	@Autowired
+	TableDao tableDao;
+
 	private Logger logger = LoggerFactory.getLogger(DemoController.class);
 
 	double data = 10.50f;
@@ -64,6 +71,13 @@ public class DemoController {
 		}
 
 //		}
+
+	}
+	public void selectAll1(){
+		List<Table> list1 = tableDao.selectAll();
+		for (Table model:list1){
+			System.out.println(model);
+		}
 	}
 
 

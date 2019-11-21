@@ -19,13 +19,14 @@ import java.util.concurrent.TimeUnit;
 public class InfluxDBConnection {
 
 	public static void main(String[] args) {
-		InfluxDBConnection influxDBConnection = new InfluxDBConnection("admin", "admin", "http://127.0.0.1:8086", "ys", null);
-		Map<String, String> tags = new HashMap<>();
-		tags.put("tag", "good");
-		Map<String, Object> fields = new HashMap<>();
-		fields.put("field", 1544f);
-		// 数值型，InfluxDB的字段类型，由第一天插入的值得类型决定
-		influxDBConnection.insert("table1", tags, fields, System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+		InfluxDBConnection influxDBConnection = new InfluxDBConnection("admin", "admin", "http://stephenyi.cn:8086", "ys", null);
+//		Map<String, String> tags = new HashMap<>();
+//		tags.put("tag", "good");
+//		Map<String, Object> fields = new HashMap<>();
+//		fields.put("field", 1544f);
+//		// 数值型，InfluxDB的字段类型，由第一天插入的值得类型决定
+//		influxDBConnection.insert("table1", tags, fields, System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+		System.out.println(influxDBConnection.ping());
 	}
 
 	private final String username;// 用户名

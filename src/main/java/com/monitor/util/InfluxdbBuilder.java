@@ -19,9 +19,11 @@ import java.util.concurrent.TimeUnit;
  **/
 @Component
 @PropertySource("classpath:influxDB.properties")
-public class InfluxdbBuilder {
+public class InfluxdbBuilder{
+
 	@Value("${influx.username}")
 	String username;
+
 	public static InfluxDB createInfluxDB(){
 		String url1 = "http://127.0.0.1:8086";
 		String url2 = "http://58.49.96.182:58086";
@@ -59,8 +61,7 @@ public class InfluxdbBuilder {
 		for (List list:series.getValues()){
 			System.out.println(list);
 		}
-
-//		System.out.println(result);
+    	System.out.println(result);
 	}
 
 	@Test
