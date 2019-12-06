@@ -23,6 +23,16 @@ public class EmailInfo implements Serializable {
         this.msg = msg;
     }
 
+    @Override
+    public String toString() {
+        return "EmailInfo{" +
+                "From='" + From + '\'' +
+                ", To='" + To + '\'' +
+                ", Subject='" + Subject + '\'' +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
+
     public String getFrom() {
         return From;
     }

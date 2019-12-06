@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.alarm.AlarmHistoryDao" >
+
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.AlarmHistory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tank_id" property="tankId" jdbcType="VARCHAR" />
+    <result column="alarm_rule_id" property="alarmRuleId" jdbcType="INTEGER" />
+    <result column="alarm_rule" property="alarmRule" jdbcType="VARCHAR" />
+    <result column="alarm_time" property="alarmTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_data" property="alarmData" jdbcType="VARCHAR" />
+    <result column="alarm_handle" property="alarmHandle" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, tank_id, alarm_rule_id, alarm_rule, alarm_time, alarm_data, alarm_handle
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from alarm_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <insert id="insertAlarmHistory" parameterType="com.monitor.pojo.AlarmHistory" useGeneratedKeys="true"
+          keyProperty="id" keyColumn="id">
+    insert into alarm_history (tank_id, alarm_rule_id,alarm_rule,alarm_time,alarm_data,alarm_handle)
+    values (#{tankId}, #{alarmRuleId}, #{alarmRule}, #{alarmTime},#{alarmData},#{alarmHandle})
+  </insert>
+
+</mapper>

@@ -1,6 +1,6 @@
 package com.monitor.dao.alarm;
 
-import com.monitor.pojo.Alarm;
+import com.monitor.pojo.AlarmRule;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,15 +12,15 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface AlarmDao {
+public interface AlarmRuleDao {
 
-    List<Alarm> selectAll();
+    List<AlarmRule> selectAll();
 
-    Alarm selectById(Integer id);
+    AlarmRule selectById(Integer id);
 
-    Integer insertAlarm(Alarm alarm);
+    Integer insertAlarm(AlarmRule alarmRule);
 
     void delete(Integer id);
 
-    void update(Alarm alarm);
+    void update(AlarmRule alarmRule);
 }

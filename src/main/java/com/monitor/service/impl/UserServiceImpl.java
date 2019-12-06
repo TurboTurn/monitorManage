@@ -1,7 +1,7 @@
 package com.monitor.service.impl;
 
-import com.monitor.dao.alarm.UserInfoDao;
-import com.monitor.pojo.UserInfo;
+import com.monitor.dao.alarm.UserDao;
+import com.monitor.pojo.User;
 import com.monitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,16 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserInfoDao userInfoDao;
+    private UserDao userDao;
 
     @Override
-    public List<UserInfo> selectAll() {
-        return userInfoDao.selectAll();
+    public List<User> selectAll() {
+        return userDao.selectAll();
     }
+
+	@Override
+	public String getEmailByUsername(String username) {
+		return null;
+	}
 
 }

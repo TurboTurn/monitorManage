@@ -1,7 +1,6 @@
 package com.monitor.controller;
 
 import com.monitor.dao.TableDao;
-import com.monitor.measurement.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author : ys
@@ -44,40 +39,6 @@ public class DemoController {
 		String s = String.format("%.2f", data);
 		logger.info("返回值为{}", s);
 		return s;
-	}
-
-	@GetMapping("/data1")
-	public double fun2() {
-		data += 1.5;
-		logger.info("返回值为{}", data);
-		return data;
-	}
-
-	@GetMapping("/lunxun")
-	public void fun3(HttpServletResponse response) throws IOException {
-//		while (true) {
-		data += 1.5;
-		PrintWriter out = response.getWriter();
-
-		for (int i = 0; i < 10; i++) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			logger.info("返回值为{}", data);
-			out.println(data);
-			out.flush();
-		}
-
-//		}
-
-	}
-	public void selectAll1(){
-		List<Table> list1 = tableDao.selectAll();
-		for (Table model:list1){
-			System.out.println(model);
-		}
 	}
 
 

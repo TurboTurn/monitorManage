@@ -1,8 +1,15 @@
 package com.monitor.util;
 
+import com.alibaba.fastjson.JSON;
+import com.monitor.measurement.Table;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
+import org.influxdb.dto.Query;
+import org.influxdb.dto.QueryResult;
 import org.influxdb.impl.InfluxDBMapper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : ys
@@ -11,6 +18,7 @@ import org.influxdb.impl.InfluxDBMapper;
 public class InfluxDBManager {
 	private InfluxDBManager(){}
 	private static String url = "http://stephenyi.cn:8086";
+	private static String dbName = "monitorMS";
 	private static String username = "root";
 	private static String password = "admin";
 	/**
@@ -28,7 +36,7 @@ public class InfluxDBManager {
 	}
 
 	private static class MapperInstance{//单例mapper
-		private static final InfluxDBMapper mapper = new InfluxDBMapper(InfluxInstance.influxDB);
+		private static final InfluxDBMapper mapper = new InfluxDBMapper(getInfluxDB());
 	}
 
 	public static InfluxDB getInfluxDB() {
@@ -37,6 +45,59 @@ public class InfluxDBManager {
 
 	public static InfluxDBMapper getInfluxDBMapper(){
 		return MapperInstance.mapper;
+	}
+
+
+	public static void main(String[] args) {
+//		delete();
+//		add();
+		String sql = String.format("select * from factory1 where a1_tank = '%s' and time > now()-30m","tank1");
+		List<Table> list = InfluxDBManager.getInfluxDBMapper().query(new Query(sql,"monitorMS"), Table.class);
+		System.out.println(list);
+//		System.out.println(JSON.toJSONString(list));
+	}
+
+	/**
+	 * 创建自定义保留策略
+	 * @param policyName 策略名
+	 * @param duration 保存天数
+	 * @param replication 保存副本数量
+	 * @param isDefault 是否设为默认保留策略
+	 */
+	public static void createRetentionPolicy(String policyName, String duration, int replication, Boolean isDefault) {
+		String sql = String.format("CREATE RETENTION POLICY \"%s\" ON \"%s\" DURATION %s REPLICATION %s ",
+				policyName, dbName, duration, replication);
+		if (isDefault) {
+			sql = sql + " DEFAULT";
+		}
+		QueryResult result = getInfluxDB().query(new Query(sql));
+		System.out.println(result);
+	}
+
+
+	public static void add(){
+//		创建默认的保留策略，策略名：default，保存天数：30天，保存副本数量：1 设为默认保留策略
+		createRetentionPolicy("default","7d",1,true);
+		createRetentionPolicy("forever","0s",1,false);
+
+		//创建连续查询 取每分钟平均值
+		String sql = "create continuous query cq_mean_1m on monitorMS" +
+				" BEGIN select mean(height_ld) as height_ld,mean(pressure) as pressure,mean(temperature) as temperature" +
+				" into forever.factory1_1m from factory1 group by time(1m),a1_tank,a2_oil END";
+		QueryResult result = getInfluxDB().query(new Query(sql));
+		System.out.println(result);
+	}
+
+	public static void delete(){
+		//删除连续查询
+		String sql = "drop continuous query cq_mean_1m on monitorMS";
+		QueryResult result = getInfluxDB().query(new Query(sql));
+		System.out.println(result);
+
+		//删除保留策略
+		sql = "drop retention policy forever on monitorMS";
+		result = getInfluxDB().query(new Query(sql));
+		System.out.println(result);
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.monitor.service;
 
 
-import com.monitor.pojo.UserInfo;
+import com.monitor.pojo.User;
 
 import java.util.List;
 
@@ -12,5 +12,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    List<UserInfo> selectAll();
+    List<User> selectAll();
+
+    String getEmailByUsername(String username);
 }

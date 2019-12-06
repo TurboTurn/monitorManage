@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monitor.dao.alarm.AlarmRuleDao">
+
+    <resultMap id="BaseAlarm" type="com.monitor.pojo.AlarmRule">
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="BaseAlarm">
+        select * from alarm_rule
+    </select>
+
+    <select id="selectById" resultMap="BaseAlarm">
+        select *
+        from alarm_rule
+        where id = #{id}
+    </select>
+
+    <insert id="insertAlarm" parameterType="com.monitor.pojo.AlarmRule" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="id">
+        insert into alarm_rule(tank_id,height_h,height_hh,pressure_h,pressure_hh,temperature_h,temperature_hh,notify_type,notifier)
+        values ( #{tankID},#{heightH},#{heightHh},#{pressureH},#{pressureHh},#{temperatureH},#{temperatureHh},#{notifyType},#{notifier})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from alarm_rule
+        where id=#{id}
+    </delete>
+
+
+    <!--动态语句  待完成-->
+    <update id="update" parameterType="com.monitor.pojo.AlarmRule">
+        update alarm_rule
+        <set>
+            <if test=" != null">
+                id= #{id},
+            </if>
+            <if test="tank != null">
+                tank = #{tank},
+            </if>
+            <if test="oil != null">
+                oil = #{oil},
+            </if>
+            <if test="height != null">
+                height = #{height},
+            </if>
+            <if test="pressure != null">
+                pressure = #{pressure},
+            </if>
+            <if test="temperature != null">
+                temperature = #{temperature},
+            </if>
+        </set>
+    </update>
+</mapper>

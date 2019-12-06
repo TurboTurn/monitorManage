@@ -1,8 +1,8 @@
 import com.monitor.App;
-import com.monitor.dao.TableDao;
-import com.monitor.measurement.Table;
-import com.monitor.pojo.Alarm;
-import com.monitor.service.AlarmService;
+import com.monitor.dao.alarm.AlarmHistoryDao;
+import com.monitor.pojo.AlarmHistory;
+import com.monitor.pojo.AlarmRule;
+import com.monitor.service.AlarmRuleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +21,27 @@ public class InfluxDBTest {
 
 
 	@Autowired
-	private AlarmService alarmService;
+	private AlarmRuleService alarmService;
+	@Autowired
+	private AlarmHistoryDao alarmHistoryDao;
 
 	/**
 	 * 查询全部数据
 	 */
 	@Test
 	public void selectAll1(){
-		List<Alarm> list1 = alarmService.selectAll();
-		for (Alarm model:list1){
+		List<AlarmRule> list1 = alarmService.selectAll();
+		for (AlarmRule model:list1){
 			System.out.println(model);
 		}
+	}
+
+	@Test
+	public void insert(){
+		AlarmHistory alarmHistory = new AlarmHistory();
+		alarmHistory.setAlarmRule("gg");
+		alarmHistoryDao.selectByPrimaryKey(1);
+		alarmHistoryDao.insertAlarmHistory(alarmHistory);
 	}
 
 }

@@ -20,11 +20,10 @@ public class TableDao extends InfluxDao<Table> {
 
 	/**
 	 * 获取最后一条记录
-	 *
 	 * @return
 	 */
-	public Table getLast() {
-		String sql = String.format("select last(idle) as idle,host,region from %s", measurement);
+	public Table getLast(String tankId) {
+		String sql = String.format("select last(*) from %s where a1_tank='%s'", measurement, tankId);
 		Query query = new Query(sql, database);
 		List<Table> list = mapper.query(query, clazz);
 		return list.get(0);
@@ -32,13 +31,11 @@ public class TableDao extends InfluxDao<Table> {
 
 	/**
 	 * 返回一个（field）字段中的非空值的数量。
-	 *
 	 * @return
 	 */
-	public int count() {
-		String sql = "select count(idle) from " + measurement;
-		Query query = new Query(sql, database);
-		QueryResult result = influxDB.query(query);
+	public int count(String tankId) {
+		String sql = String.format("select count(*) from %s where a1_tank='%s'", measurement, tankId);
+		QueryResult result = influxDB.query(new Query(sql, database));
 		//QueryResult [results=[Result [series=[Series [name=table1, tags=null, columns=[time, count], values=[[1970-01-01T00:00:00Z, 24.0]]]], error=null]], error=null]
 		double count = (double) result.getResults().get(0).getSeries().get(0).getValues().get(0).get(1);
 		return (int) count;

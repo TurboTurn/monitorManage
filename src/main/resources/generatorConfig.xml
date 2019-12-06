@@ -40,7 +40,7 @@
         </sqlMapGenerator>
 
         <!--生成dao文件  可以配置 type="XMLMAPPER"生成xml的dao实现-->
-        <javaClientGenerator targetPackage="com.monitor.dao.alarm"
+        <javaClientGenerator targetPackage="com.monitor.dao.alarmRule"
                              targetProject="src/main/java" type="XMLMAPPER" >
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -53,7 +53,7 @@
                <!--selectByExampleQueryId="false"-->
         <!--&gt;</table>-->
 
-        <!--<table tableName="alarm" domainObjectName="Alarm"-->
+        <!--<table tableName="alarmRule" domainObjectName="Alarm"-->
                <!--enableCountByExample="false"-->
                <!--enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false"-->

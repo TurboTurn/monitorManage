@@ -1,6 +1,6 @@
 package com.monitor.service;
 
-import com.monitor.pojo.Alarm;
+import com.monitor.pojo.AlarmRule;
 
 import java.util.List;
 
@@ -8,26 +8,26 @@ import java.util.List;
  * @author Created by Divo
  * @date 2019/11/18
  */
-public interface AlarmService {
+public interface AlarmRuleService {
     /**
      * 读取所有的报警规则
      * @return
      */
-    List<Alarm> selectAll();
+    List<AlarmRule> selectAll();
 
     /**
      * 通过报警Id来查询相应的报警规则
      * @param id
      * @return
      */
-    Alarm selectById(Integer id);
+    AlarmRule selectById(Integer id);
 
     /**
      * 插入一条规则
-     * @param alarm
+     * @param alarmRule
      * @return
      */
-    Integer insertAlarm(Alarm alarm);
+    Integer insertAlarm(AlarmRule alarmRule);
 
     /**
      * 通过Id来删除报警规则
@@ -38,7 +38,7 @@ public interface AlarmService {
 
     /**
      * 跟新报警规则
-     * @param alarm
+     * @param alarmRule
      */
-    void update(Alarm alarm);
+    void update(AlarmRule alarmRule);
 }

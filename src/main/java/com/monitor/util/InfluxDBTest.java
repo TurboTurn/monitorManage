@@ -7,8 +7,6 @@ import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +17,8 @@ import java.util.concurrent.TimeUnit;
  **/
 //@Component
 //@PropertySource("classpath:influxDB.properties")
-public class InfluxdbBuilder{
+// 功能测试类，无作用
+public class InfluxDBTest {
 
 	@Value("${influx.username}")
 	String username;
@@ -36,12 +35,12 @@ public class InfluxdbBuilder{
 	}
 	@Test
 	public void ping(){
-		InfluxDB influxDB = InfluxdbBuilder.createInfluxDB();
+		InfluxDB influxDB = InfluxDBTest.createInfluxDB();
 		System.out.println(influxDB.ping().toString());
 	}
 
 	public static void main(String[] args) {
-		InfluxDB influxDB = InfluxdbBuilder.createInfluxDB();
+		InfluxDB influxDB = InfluxDBTest.createInfluxDB();
 		float i=2000;
 		String sql = "insert mytable,host=localhost mytime="+i;
 		String sql2 = "insert table1,tag=good field="+i;//不支持
@@ -68,7 +67,7 @@ public class InfluxdbBuilder{
 	public void insert() throws InterruptedException {
 
 		String tablename = "table1";
-		InfluxDB influxDB = InfluxdbBuilder.createInfluxDB();
+		InfluxDB influxDB = InfluxDBTest.createInfluxDB();
 		double f = 2036;
 		String tag;
 		boolean flag = true;

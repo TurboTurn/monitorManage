@@ -16,12 +16,6 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = "com.monitor.*")//不指明单元测试会报错
 public class App {
 
-	@PostConstruct
-	public void init() {
-		System.out.println("系统初始化完成");
-	}
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}

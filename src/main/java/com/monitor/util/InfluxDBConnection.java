@@ -98,8 +98,8 @@ public class InfluxDBConnection {
 	 *
 	 */
 	public void createRetentionPolicy(String policyName, String duration, int replication, Boolean isDefault) {
-		String sql = String.format("CREATE RETENTION POLICY \"%s\" ON \"%s\" DURATION %s REPLICATION %s ", policyName,
-				database, duration, replication);
+		String sql = String.format("CREATE RETENTION POLICY \"%s\" ON \"%s\" DURATION %s REPLICATION %s ",
+				policyName,database, duration, replication);
 		if (isDefault) {
 			sql = sql + " DEFAULT";
 		}
@@ -109,8 +109,7 @@ public class InfluxDBConnection {
 	/**
 	 * 创建默认的保留策略
 	 *
-	 * 	策略名：default，保存天数：30天，保存副本数量：1
-	 *            设为默认保留策略
+	 * 策略名：default，保存天数：30天，保存副本数量：1 设为默认保留策略
 	 */
 	public void createDefaultRetentionPolicy() {
 		String command = String.format("CREATE RETENTION POLICY \"%s\" ON \"%s\" DURATION %s REPLICATION %s DEFAULT",

@@ -1,5 +1,5 @@
 import com.monitor.App;
-import com.monitor.MQ.AlarmConsumer;
+import com.monitor.mq.AlarmConsumer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

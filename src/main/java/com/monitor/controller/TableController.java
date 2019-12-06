@@ -38,7 +38,7 @@ public class TableController {
 	@ApiOperation(value = "查询最新",notes = "查询最新一条数据")
 	@GetMapping("/last")
 	public Table getLast(){
-		return tableDao.getLast();
+		return tableDao.getLast("tank1");
 	}
 
 	/**
@@ -60,6 +60,6 @@ public class TableController {
 	@ApiOperation(value = "查询总数",notes = "查询表里field字段的总记录数")
 	@GetMapping("/count")
 	public int count(){
-		return tableDao.count();
+		return tableDao.count("tank1");
 	}
 }
