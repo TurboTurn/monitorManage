@@ -15,31 +15,41 @@ import java.util.List;
 @Service
 public class AlarmRuleServiceImpl implements AlarmRuleService {
 
-    @Autowired
-    private AlarmRuleDao alarmRuleDao;
+	@Autowired
+	private AlarmRuleDao alarmRuleDao;
 
-    @Override
-    public List<AlarmRule> selectAll() {
-        return alarmRuleDao.selectAll();
-    }
+	@Override
+	public List<AlarmRule> selectAll() {
+		return alarmRuleDao.selectAll();
+	}
 
-    @Override
-    public AlarmRule selectById(Integer id) {
-        return alarmRuleDao.selectById(id);
-    }
+	@Override
+	public AlarmRule selectById(Integer id) {
+		return alarmRuleDao.selectById(id);
+	}
 
-    @Override
-    public Integer insertAlarm(AlarmRule alarmRule) {
-       return alarmRuleDao.insertAlarm(alarmRule);
-    }
+	@Override
+	public Integer count() {
+		return alarmRuleDao.count();
+	}
 
-    @Override
-    public void delete(Integer id) {
-        alarmRuleDao.delete(id);
-    }
+	@Override
+	public List<AlarmRule> listQuery(Integer pageNo, Integer pageSize) {
+		return alarmRuleDao.listQuery((pageNo - 1) * pageSize, pageSize);
+	}
 
-    @Override
-    public void update(AlarmRule alarmRule) {
-        alarmRuleDao.update(alarmRule);
-    }
+	@Override
+	public Integer insertAlarmRule(AlarmRule alarmRule) {
+		return alarmRuleDao.insertAlarmRule(alarmRule);
+	}
+
+	@Override
+	public Integer delete(Integer id) {
+		return alarmRuleDao.delete(id);
+	}
+
+	@Override
+	public Integer update(AlarmRule alarmRule) {
+		return alarmRuleDao.update(alarmRule);
+	}
 }

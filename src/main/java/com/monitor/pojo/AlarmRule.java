@@ -10,55 +10,70 @@ import java.io.Serializable;
 public class AlarmRule implements Serializable {
 
     private Integer id;
-    private String tankID;
-    private float heightH;
-    private float heightHh;
-    private float pressureH;
-    private float pressureHh;
-    private float temperatureH;
-    private float temperatureHh;
-    private Integer notifyType;
-    private String notifier;
+	private String tankId;
+	private float heightH;
+	private float heightHh;
+	private float pressureH;
+	private float pressureHh;
+	private float temperatureH;
+	private float temperatureHh;
+	private Integer notifyType;
+	private String notifier;
 
-    @Override
-    public String toString() {
-        return "AlarmRule{" +
-                "id=" + id +
-                ", tankID='" + tankID + '\'' +
-                ", heightH=" + heightH +
-                ", heightHh=" + heightHh +
-                ", pressureH=" + pressureH +
-                ", pressureHh=" + pressureHh +
-                ", temperatureH=" + temperatureH +
-                ", temperatureHh=" + temperatureHh +
-                ", notifyType=" + notifyType +
-                ", notifier='" + notifier + '\'' +
-                '}';
-    }
+	public AlarmRule() {
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public AlarmRule(String tankId, float heightH, float heightHh, float pressureH, float pressureHh, float temperatureH, float temperatureHh, Integer notifyType, String notifier) {
+		this.tankId = tankId;
+		this.heightH = heightH;
+		this.heightHh = heightHh;
+		this.pressureH = pressureH;
+		this.pressureHh = pressureHh;
+		this.temperatureH = temperatureH;
+		this.temperatureHh = temperatureHh;
+		this.notifyType = notifyType;
+		this.notifier = notifier;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	@Override
+	public String toString() {
+		return "AlarmRule{" +
+				"id=" + id +
+				", tankId='" + tankId + '\'' +
+				", heightH=" + heightH +
+				", heightHh=" + heightHh +
+				", pressureH=" + pressureH +
+				", pressureHh=" + pressureHh +
+				", temperatureH=" + temperatureH +
+				", temperatureHh=" + temperatureHh +
+				", notifyType=" + notifyType +
+				", notifier='" + notifier + '\'' +
+				'}';
+	}
 
-    public String getTankID() {
-        return tankID;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setTankID(String tankID) {
-        this.tankID = tankID;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public float getHeightH() {
-        return heightH;
-    }
+	public String getTankId() {
+		return tankId;
+	}
 
-    public void setHeightH(float heightH) {
-        this.heightH = heightH;
-    }
+	public void setTankId(String tankId) {
+		this.tankId = tankId;
+	}
+
+	public float getHeightH() {
+		return heightH;
+	}
+
+	public void setHeightH(float heightH) {
+		this.heightH = heightH;
+	}
 
     public float getHeightHh() {
         return heightHh;

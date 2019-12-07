@@ -8,7 +8,6 @@ import org.influxdb.dto.Query;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -25,9 +24,9 @@ public class DetailMonitor {//罐区详细监控
 			String tankId = entry.getKey();
 			CopyOnWriteArraySet<DetailWebSocket> set = entry.getValue();
 			if(set.size() > 0){//该油罐存在浏览器连接
-				String sql = String.format("select * from factory1 where a1_tank = '%s' and time > now()-30m",tankId);
-				List<Tank> list = InfluxDBManager.getInfluxDBMapper().query(new Query(sql), Tank.class);
-				for (DetailWebSocket webSocket : set){
+				String sql = String.format("select * from factory1 where a1_tank = '%s' and time > now()-30m", tankId);
+				List<Tank> list = InfluxDBManager.getInfluxDBMapper().query(new Query(sql), Tank.class);//此处使用tank需修改，没有Measurement
+				for (DetailWebSocket webSocket : set) {
 					webSocket.sendMessage(JSON.toJSONString(list));
 				}
 			}

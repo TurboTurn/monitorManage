@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.monitor.dao.alarm.AlarmRuleDao">
-
+    <cache/>
     <resultMap id="BaseAlarm" type="com.monitor.pojo.AlarmRule">
     </resultMap>
 
@@ -16,11 +16,17 @@
         from alarm_rule
         where id = #{id}
     </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from alarm_rule
+    </select>
+    <select id="listQuery" resultType="com.monitor.pojo.AlarmRule">
+        select * from alarm_rule limit #{start}, #{size};
+    </select>
 
-    <insert id="insertAlarm" parameterType="com.monitor.pojo.AlarmRule" useGeneratedKeys="true"
+    <insert id="insertAlarmRule" parameterType="com.monitor.pojo.AlarmRule" useGeneratedKeys="true"
             keyProperty="id" keyColumn="id">
         insert into alarm_rule(tank_id,height_h,height_hh,pressure_h,pressure_hh,temperature_h,temperature_hh,notify_type,notifier)
-        values ( #{tankID},#{heightH},#{heightHh},#{pressureH},#{pressureHh},#{temperatureH},#{temperatureHh},#{notifyType},#{notifier})
+        values ( #{tankId},#{heightH},#{heightHh},#{pressureH},#{pressureHh},#{temperatureH},#{temperatureHh},#{notifyType},#{notifier})
     </insert>
 
     <delete id="delete" parameterType="java.lang.Integer">
@@ -29,28 +35,38 @@
     </delete>
 
 
-    <!--动态语句  待完成-->
+
     <update id="update" parameterType="com.monitor.pojo.AlarmRule">
         update alarm_rule
         <set>
-            <if test=" != null">
-                id= #{id},
+            <if test="tankId != null">
+                tank_id = #{tankId},
             </if>
-            <if test="tank != null">
-                tank = #{tank},
+            <if test="heightH != null">
+                height_h = #{heightH},
             </if>
-            <if test="oil != null">
-                oil = #{oil},
+            <if test="heightHh != null">
+                height_hh = #{heightHh},
             </if>
-            <if test="height != null">
-                height = #{height},
+            <if test="pressureH != null">
+                pressure_h = #{pressureH},
             </if>
-            <if test="pressure != null">
-                pressure = #{pressure},
+            <if test="pressureHh != null">
+                pressure_hh = #{pressureH},
             </if>
-            <if test="temperature != null">
-                temperature = #{temperature},
+            <if test="temperatureH != null">
+                temperature_h = #{temperatureH},
+            </if>
+            <if test="temperatureHh != null">
+                temperature_hh = #{temperatureH},
+            </if>
+            <if test="notifyType != null">
+                notify_type = #{notifyType},
+            </if>
+            <if test="notifier != null">
+                notifier = #{notifier},
             </if>
         </set>
+        <where>id= #{id}</where>
     </update>
 </mapper>

@@ -1,17 +1,12 @@
 import org.junit.Test;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author : ys
  * @date : 2019/4/24 9:27 星期三
  **/
 public class UnitTest {
-	@Test
-	public void t1() throws InterruptedException {
+//	@Test
+	/*public void t1() throws InterruptedException {
 		ArrayList<Integer> list = new ArrayList<>();
 		int a=300;
 		for(int i=0;i<7;i++){
@@ -33,6 +28,11 @@ public class UnitTest {
 			TimeUnit.SECONDS.sleep(1);
 
 		}
+	}*/
+
+	@Test
+	public void t2() {
 
 	}
+
 }

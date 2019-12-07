@@ -1,15 +1,10 @@
 package com.monitor.util;
 
-import com.alibaba.fastjson.JSON;
-import com.monitor.measurement.Table;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.influxdb.impl.InfluxDBMapper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author : ys
@@ -51,10 +46,9 @@ public class InfluxDBManager {
 	public static void main(String[] args) {
 //		delete();
 //		add();
-		String sql = String.format("select * from factory1 where a1_tank = '%s' and time > now()-30m","tank1");
-		List<Table> list = InfluxDBManager.getInfluxDBMapper().query(new Query(sql,"monitorMS"), Table.class);
-		System.out.println(list);
-//		System.out.println(JSON.toJSONString(list));
+//		String sql = String.format("select * from factory1 where a1_tank = '%s' and time > now()-30m","tank1");
+//		List<Table> list = InfluxDBManager.getInfluxDBMapper().query(new Query(sql,"monitorMS"), Table.class);
+//		System.out.println(list);
 	}
 
 	/**

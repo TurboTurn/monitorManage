@@ -12,33 +12,41 @@ public interface AlarmRuleService {
     /**
      * 读取所有的报警规则
      * @return
-     */
-    List<AlarmRule> selectAll();
+	 */
+	List<AlarmRule> selectAll();
 
-    /**
-     * 通过报警Id来查询相应的报警规则
-     * @param id
-     * @return
-     */
-    AlarmRule selectById(Integer id);
+	/**
+	 * 通过报警Id来查询相应的报警规则
+	 *
+	 * @param id
+	 * @return
+	 */
+	AlarmRule selectById(Integer id);
 
-    /**
-     * 插入一条规则
-     * @param alarmRule
-     * @return
-     */
-    Integer insertAlarm(AlarmRule alarmRule);
+	Integer count();
 
-    /**
-     * 通过Id来删除报警规则
-     * @param id
-     * @return
-     */
-    void delete(Integer id);
+	List<AlarmRule> listQuery(Integer pageNo, Integer pageSize);
 
-    /**
-     * 跟新报警规则
-     * @param alarmRule
-     */
-    void update(AlarmRule alarmRule);
+	/**
+	 * 插入一条规则
+	 *
+	 * @param alarmRule
+	 * @return
+	 */
+	Integer insertAlarmRule(AlarmRule alarmRule);
+
+	/**
+	 * 通过Id来删除报警规则
+	 *
+	 * @param id
+	 * @return
+	 */
+	Integer delete(Integer id);
+
+	/**
+	 * 跟新报警规则
+	 *
+	 * @param alarmRule
+	 */
+	Integer update(AlarmRule alarmRule);
 }
