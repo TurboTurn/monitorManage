@@ -10,7 +10,7 @@ server:
 
     accesslog:
       buffered: true
-#      directory: C:/logs
+      #      directory: C:/logs
       directory: /root/logs
       enabled: true
       file-date-format: .yyyy-MM-dd
@@ -26,11 +26,11 @@ spring:
   #  profiles:
   #    active: dev
   datasource:
-    #    url: jdbc:mysql://47.100.213.205:3306/monitor?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
-    url: jdbc:mysql://127.0.0.1:3306/monitor?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://47.100.213.205:3306/monitor?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    #    url: jdbc:mysql://127.0.0.1:3306/monitor?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
     username: root
-    password: admin
-    #    password: Mydb6.
+      #    password: admin
+    password: Mydb6.
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 2 #初始化连接个数

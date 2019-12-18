@@ -3,7 +3,7 @@ package com.monitor.task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +22,7 @@ public class ScheduledTask {
 
 	@Async(value = "pushThreadPool")
 //	@Scheduled(fixedRate = 5000)	//注释该注解表示关闭任务
+	@Scheduled(cron = "0/5 * * * * ?")
 	public void reportCurrent(){
 		logger.info("{},当前时间{}",Thread.currentThread().getName(),dateFormat.format(new Date()));
 	}

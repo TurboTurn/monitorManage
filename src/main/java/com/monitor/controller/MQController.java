@@ -1,4 +1,4 @@
-package com.monitor.mq;
+package com.monitor.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +30,9 @@ public class MQController {
 
 
 	@PostMapping(path = "/collect/tank")
-	public String sendKafka(@RequestBody String jsonString) {
+	public ResultEntity sendKafka(@RequestBody String jsonString) {
 		kafkaTemplate.send("tankTopic", jsonString);
-		return "accept";
+		return ResultEntity.success("accept");
 	}
 
 

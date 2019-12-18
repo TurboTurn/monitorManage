@@ -11,6 +11,7 @@ import org.influxdb.dto.Point;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,15 +23,14 @@ import java.util.concurrent.TimeUnit;
  **/
 
 
-//@Component
-public class MQConsumer {
-	private Logger logger = LoggerFactory.getLogger(MQConsumer.class);
+@Component
+public class InfluxDBConsumer {
+	private Logger logger = LoggerFactory.getLogger(InfluxDBConsumer.class);
 
 	private InfluxDB influxDB = InfluxDBManager.getInfluxDB();
 
 	private String dbName = "monitorMS";
 	private String measurement = "factory1";
-	int count = 0;
 
 	@KafkaListener(topics = "tankTopic", containerFactory = "containerFactory1")
 	public void onMessage(String message) {
@@ -38,8 +38,6 @@ public class MQConsumer {
 		List<Tank> list = JSONObject.parseArray(message, Tank.class);
 //		System.out.println("采集的数据为：\n" + message);
 //		System.out.println();
-		count++;
-		System.out.println("存储模块收到数据"+count);
 		if (list.size() > 0) {
 			BatchPoints batchPoints = BatchPoints
 					.database(dbName)
